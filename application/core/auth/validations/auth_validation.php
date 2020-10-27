@@ -3,7 +3,7 @@
 $user->start();
 if (!$user->isSigned()) {
 
-        header('location: ' . URL . 'auth/index');
+    header('location: ' . URL . 'auth/index');
 }
 
 $projects = $this->model['Project']->getAllProjects($user->getProperty('ID'));
@@ -14,4 +14,7 @@ $uncompletedProjectsAdminOf = $this->model['Project']->getAllUncompletedProjects
 $completedProjectsMemberOf = $this->model['Project']->getAllCompletedProjectsMemberOf($user->getProperty('ID'));
 $completedProjectsAdminOf = $this->model['Project']->getAllCompletedProjectsAdminOf($user->getProperty('ID'));
 
-$invitations = $this->model['Invitation']->getAllInvitations ($user->getProperty('ID'));
+$invitations = $this->model['Invitation']->getAllInvitations($user->getProperty('ID'));
+
+
+$flash = array();

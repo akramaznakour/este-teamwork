@@ -13,36 +13,14 @@ $(function () {
     });
 
     /****************************************/
-
-    var a = 1;
-    var html_form = '';
-    var html_form_2 = '';
-
-
+    $resource = '';
     $(document).ready(function () {
-        html_form = '<div class="row">' + $('#resources_tab > div').html() + '</div>';
+        $resource = $('#resources_tab').html();
     });
 
-    $('.add_respo').on('click', function (e) {
-
-
-        if (html_form_2 == '') {
-            html_form_2 = '<div class="form-group">' + $(this).parent().parent().parent().find("#respo > div").html() + '</div>';
-            $(this).parent().parent().parent().find("#respo").append(html_form_2);
-        }
-
-    });
-
-    // add rescources
-    $('#add_rescource').on('click', function (e) {
-
-        $('#resources_tab').append(html_form.replace("1", ++a));
-        var fun = function () {
-            $('.add_respo').on('click', function (e) {
-                $(this).parent().parent().parent().find("#respo").append('<div class="form-group">' + $(this).parent().parent().parent().find("#respo > div").html() + '</div>');
-            });
-        };
-        fun();
+    // add resources
+    $('#add_resource').on('click', function (e) {
+        $(this).parent().find('#resources_tab').append($resource);
     });
 
 

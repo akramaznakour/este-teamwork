@@ -15,7 +15,7 @@
         <?php
         foreach ($tasks as $task) {
 
-            echo "g.AddTaskItem(new JSGantt.TaskItem(" . $task->id . ", '" . $task->name . "' , '" . $task->actual_start . "', '" . $task->actual_end . "', '" . $task->style . "', '" . $task->link . "', " . $task->mile . ", '" . $task->responsable . "'," . $task->comp . ", " . $task->group . "," . $task->parent . ", " . $task->open . ", '" . $task->depend . "',  '" . $task->caption . "'    ,  '" . $task->note . "', g));  ";
+            echo "g.AddTaskItem(new JSGantt.TaskItem(" . $task->id . ", '" . $task->name . "' , '" . $task->actual_start . "', '" . $task->actual_end . "', '" . $task->style . "', '" . $task->link . "', " . $task->mile . ", '" .   $this->model['User']->getUser($task->responsable_id)->first_name.'  '.  $this->model['User']->getUser($task->responsable_id)->last_name. "'," . $task->comp . ", " . $task->group . "," . $task->parent . ", " . $task->open . ", '" . $task->depend . "',  '" . $task->caption . "'    ,  '" . $task->note . "', g));  ";
 
         }
         ?>
