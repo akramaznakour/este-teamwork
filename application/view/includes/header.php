@@ -30,15 +30,14 @@
                         <i class="fa fa-bell-o"></i>
                         <span class="label"><?php echo count($notifications); ?></span>
                     </a>
-                    <ul class="dropdown-menu media-list pull-right animated fadeInDown">
+                    <ul class="dropdown-menu media-list pull-right animated fadeInDown" style="height: 300px;overflow: auto">
                         <li class="dropdown-header">Notifications (<?php echo count($notifications); ?>)</li>
                         <?php foreach ($notifications as $notification) { ?>
                             <li class="media">
                                 <a href="#modal-alert-notification-<?php echo $notification->id ?>"   data-toggle="modal">
 
-                                    <div class="media-left"><i class="fa fa-envelope media-object bg-blue"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"> <?php echo $notification->content; ?></h6>
+                                     <div class="media-body">
+                                        <h6 class="media-heading"> <?php echo substr($notification->content,0,30); ?>...</h6>
                                         <div class="text-muted f-s-11"><?php echo $notification->time ?></div>
                                     </div>
                                 </a>
@@ -59,7 +58,7 @@
                 </li>
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?php echo URL . 'uploads/' . $user->Avatar; ?>" alt=""/>
+                        <img src="<?php echo URL . 'uploads/' . $user->avatar; ?>" alt=""/>
                         <span class="hidden-xs"><?php echo $user->first_name . ' ' . $user->last_name; ?> </span> <b
                                 class="caret"></b>
                     </a>
@@ -79,33 +78,5 @@
 
     <?php foreach ($notifications as $notification) { ?>
 
-    <div class="modal fade" id="modal-alert-notification-<?php echo $notification->id ?>">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <a type="button" class="close" data-dismiss="modal"
-                       aria-hidden="true">×
-                    </a>
-                    <h4 class="modal-title"> <span class="fa fa-bell"></span> &nbsp; Notification</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="alert alert-primary m-b-0">
-
-                        <h6><?php echo $notification->content ;?></h6>
-                        <span class="pull-right"><?php echo $notification->time ;?></span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <form method="post" class="form-inline" action="<?php echo URL.'notifications/setSeen/'.$notification->id?>">
-                        <a href="javascript:;" class="btn btn-sm btn-white"
-                           data-dismiss="modal">Close</a>
-
-                        <button name="submit_set_seen" type="submit" class="btn btn-sm btn-danger">
-                            Set as seen
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php include APP.'view/includes/notification.php'?>
 <?php } ?>

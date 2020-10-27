@@ -1,5 +1,5 @@
 /* Sample CSS for jsGanttImproved v1.7.5.4 */
-div.gantt		{ font-family:tahoma, arial, verdana, Sans-serif; font-size:10px; color: #656565; }
+div.gantt		{ font-family:tahoma, arial, verdana, Sans-serif; font-size:14px; color: #656565; }
 
 .gantt table	{ border-collapse: collapse; }
 .gantt td { padding: 0px; }
@@ -94,8 +94,8 @@ span.gfoldercollapse		{ color:#000000; cursor:pointer; font-weight:bold; font-si
 
 /* Task bars - ggroupblack is set as the default class on the task if it is undefined */
 .ggroupblack { height: 7px; background: #000000; margin-top: 2px; }
-.ggroupblackendpointleft	{ overflow: hidden; width:0px; height:0px; top: 2px; border-top: 4px solid black; border-left: 4px solid transparent; border-bottom: 4px solid transparent; border-right: 4px solid transparent; float: left; }
-.ggroupblackendpointright	{ overflow: hidden; width:0px; height:0px; top: 2px; border-top: 4px solid black; border-left: 4px solid transparent; border-bottom: 4px solid transparent; border-right: 4px solid transparent; float: right; }
+.ggroupblackendpointleft	{ overflow: hidden; width:0px; height:0px; top: 2px; border-top: 5px solid black; border-left: 5px solid transparent; border-bottom: 5px solid transparent; border-right: 5px solid transparent; float: left; }
+.ggroupblackendpointright	{ overflow: hidden; width:0px; height:0px; top: 2px; border-top: 5px solid black; border-left: 5px solid transparent; border-bottom: 5px solid transparent; border-right: 5px solid transparent; float: right; }
 .ggroupblackcomplete		{ float:left; overflow: hidden; height:3px; filter: alpha(opacity=80); opacity:0.8; background-color:#777777; margin-top:2px; margin-bottom: 2px; }
 .gtaskblue {
 	background: rgb(58,132,195); /* Old browsers */
@@ -163,9 +163,9 @@ span.gfoldercollapse		{ color:#000000; cursor:pointer; font-weight:bold; font-si
 .gDepSF,
 .gDepFF				{ border-color: #ff0000; }
 .gDepFSArw,
-.gDepSSArw			{ overflow: hidden; width:0px; height:0px; border-bottom: 4px solid transparent; border-left: 4px solid #ff0000; border-top: 4px solid transparent; border-right: 4px solid transparent;}
+.gDepSSArw			{ overflow: hidden; width:0px; height:0px; border-bottom: 5px solid transparent; border-left: 5px solid #ff0000; border-top: 5px solid transparent; border-right: 5px solid transparent;}
 .gDepFFArw,
-.gDepSFArw			{ overflow: hidden; width:0px; height:0px; border-bottom: 4px solid transparent; border-left: 4px solid transparent; border-top: 4px solid transparent; border-right: 4px solid #ff0000;}
+.gDepSFArw			{ overflow: hidden; width:0px; height:0px; border-bottom: 5px solid transparent; border-left: 5px solid transparent; border-top: 5px solid transparent; border-right: 5px solid #ff0000;}
 .gCurDate			{ border-color: #0000ff; }
 
 
@@ -210,22 +210,21 @@ td.gmajorheading div { *overflow: hidden; } /* stops resizing fixed width column
 td.gspanning div { *overflow: hidden; } /* stops resizing fixed width columns if the text is too wide */
 
 /* border transparency tricks */
-.ggroupblackendpointleft { _border-top: 4px solid black; _border-left: 4px solid pink; _border-bottom: 4px solid pink; _border-right: 4px solid pink; _filter: chroma(color=pink); }
-.ggroupblackendpointright { _border-top: 4px solid black; _border-left: 4px solid pink; _border-bottom: 4px solid pink; _border-right: 4px solid pink;_filter: chroma(color=pink); }
+.ggroupblackendpointleft { _border-top: 5px solid black; _border-left: 5px solid pink; _border-bottom: 5px solid pink; _border-right: 5px solid pink; _filter: chroma(color=pink); }
+.ggroupblackendpointright { _border-top: 5px solid black; _border-left: 5px solid pink; _border-bottom: 5px solid pink; _border-right: 5px solid pink;_filter: chroma(color=pink); }
 
 .gmdtop { _border-left: 5px solid pink; _border-top: 5px solid pink; _border-right: 5px solid pink; _filter: chroma(color=pink);}
 .gmdbottom { _border-left: 5px solid pink; _border-bottom: 5px solid pink; _border-right: 5px solid pink; _filter: chroma(color=pink);}
 
 .gDepFSArw,
-.gDepSSArw { _border-bottom: 4px solid pink; _border-top: 4px solid pink; _border-right: 4px solid pink; _filter: chroma(color=pink);}
+.gDepSSArw { _border-bottom: 5px solid pink; _border-top: 5px solid pink; _border-right: 5px solid pink; _filter: chroma(color=pink);}
 .gDepFFArw,
-.gDepSFArw { _border-bottom: 4px solid pink; _border-left: 4px solid pink; _border-top: 4px solid pink; _filter: chroma(color=pink);}
+.gDepSFArw { _border-bottom: 5px solid pink; _border-left: 5px solid pink; _border-top: 5px solid pink; _filter: chroma(color=pink);}
 
 /* Workaround for odd bug in old versions of Opera - no other browser needs this */
 .glinediv {position: absolute; top: 0px; left: 0px;}
 
-/* if using setUseSingleCell(1) the following is a suggested set of CSS3 styles to recreate the table grid - won't work on old browsers
-.ggrouphour td,
+ .ggrouphour td,
 .gmilehour td,
 .gitemhour td			{ background-size: 19px 1px; background-image: linear-gradient(to left, #efefef, transparent 1px, transparent 18px); width: 100%; height: 19px; }
 .ggroupday td,
@@ -240,7 +239,6 @@ td.gspanning div { *overflow: hidden; } /* stops resizing fixed width columns if
 .ggroupquarter td,
 .gmilequarter td,
 .gitemquarter td		{ background-size: 19px 1px; background-image: linear-gradient(to left, #efefef, transparent 1px, transparent 18px); width: 100%; height: 19px; }
-*/
 
 
 

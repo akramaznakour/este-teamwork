@@ -2,13 +2,13 @@
     <table class="table ">
         <thead>
         <tr>
-            <th style="width: 15%">Name</th>
+            <th>Name</th>
             <th>Start date</th>
             <th>End date</th>
             <th>Responsable</th>
+            <th>Status</th>
             <th>Progress</th>
             <th>Resources</th>
-            <th>Show</th>
             <?php if ($user->ID == $project->admin_id) { ?>
 
                 <th>Admin panel</th>
@@ -17,21 +17,30 @@
         </tr>
         </thead>
         <tbody>
+        <tr></tr>
+        <?php foreach ($tasks
 
-        <?php foreach ($tasks as $task) { ?>
-            <tr <?php if ($task->parent == 0) { ?> class="active p-l-10"  <?php } ?> style="font-size: 15px">
-                <td <?php if (!$task->isGroup && $task->parent) { ?> style="padding-left: 60px;"  <?php } else { ?> style="font-weight: bolder;"   <?php } ?> ><?php echo $task->name; ?></td>
+                       as $task) { ?>
+            <tr style="font-size: 15px">
+                <td><?php echo $task->name; ?></td>
 
                 <td><?php echo $task->start_date; ?></td>
                 <td><?php echo $task->end_date; ?></td>
+                <td><?php if ($task->responsable_id != 0) {
+                        echo $this->model['User']->getUser($task->responsable_id)->first_name . ' ' . $this->model['User']->getUser($task->responsable_id)->last_name;
+                    } else {
+                        echo "undetermend";
+                    } ?></td>
+
                 <td>
-                    <?php foreach ($this->model['Task']->getTaskResponsables($task->id) as $responsable) { ?>
-                        <?php echo $this->model['User']->getUser($responsable->responsable_id)->last_name . ' ' . $this->model['User']->getUser($responsable->responsable_id)->first_name . "<br/>"; ?>
+                    <?php if ($task->progress < 100 && $task->progress != 0 && $task->isGroup != 1) { ?>
+                        <span class="btn btn-sm btn-info">in progress</span>
+                    <?php } elseif ($task->progress == '100') { ?>
+                        <span class="btn btn-sm btn-success">finished</span>
+                    <?php } elseif ($task->progress == 0 && $task->isGroup != 1) { ?>
+                        <span class="btn btn-sm btn-primary">just initiated</span>
                     <?php } ?>
-
                 </td>
-
-
                 <td>
                     <?php if ($task->isGroup == '1') { ?>
                         <form class="form-inline">
@@ -39,8 +48,7 @@
                                    class=" input-sm" type="number" disabled min="0" max="100"
                                    value="<?php echo $task->progress ?>"> &nbsp; %
                         </form>
-                    <?php } elseif ($this->model['Task']->isResponsableOf($task->id, $user->ID)) { ?>
-
+                    <?php } elseif ($task->responsable_id == $user->ID) { ?>
                         <form method="post" class="form-inline"
                               action="<?php echo URL . 'tasks/updateProgress/' . $task->id ?>">
                             <input style="width: 70px" name="progress"
@@ -70,9 +78,6 @@
                     <?php foreach ($this->model['Task']->getTaskResources($task->id) as $resource) {
                         echo $resource->name . ' <br/>';
                     } ?>
-                </td>
-                <td>
-                    <a class="btn btn-sm btn-primary" href="<?php echo URL.'tasks/show/'.$task->id?>"><span class="fa fa-search"></span></a>
                 </td>
                 <?php if ($user->ID == $project->admin_id) { ?>
 

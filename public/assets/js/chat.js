@@ -1,7 +1,7 @@
 $('#chat-box-head').click(function () {
     $("#body-chat").fadeToggle();
     $("#footer-chat").fadeToggle();
-})
+});
 $('#chat-btn').on('click', function () {
     var msg = $('#chat-input').val();
     $.post(url + "chat/store/" + project_id, {

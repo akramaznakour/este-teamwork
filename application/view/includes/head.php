@@ -17,8 +17,10 @@
     <link href="<?php echo URL; ?>assets/css/style.min.css" rel="stylesheet"/>
     <link href="<?php echo URL; ?>assets/css/style-responsive.min.css" rel="stylesheet"/>
 
-    <?php if (isset($_GET['url']) && (substr($_GET['url'], 0, 13) == 'projects/show' || substr($_GET['url'], 0, 10) == 'tasks/show'  ) ) { ?><!-- ================== BEGIN PAGE projects/show ================== --><?php if ($project->admin_id == $user->ID) { ?>
-        <link href="<?php echo URL; ?>assets/plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet"/><?php } ?>
+    <?php if (true) { ?><!-- ================== BEGIN PAGE projects/show ================== -->
+    <?php if (true) { ?>
+        <link href="<?php echo URL; ?>assets/plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet"/>
+    <?php } ?>
     <link href="<?php echo URL; ?>assets/jsgantt/jsgantt.css" rel="stylesheet">
     <script src="<?php echo URL; ?>assets/jsgantt/jsgantt.js"></script>
     <style>.chat {
@@ -29,7 +31,9 @@
             position: fixed;
             width: 300px;
         }</style><!-- ================== END PAGE projects/show ================== -->
-    <?php } ?><?php if (!isset($_GET['url'])) { ?><!-- ================== BEGIN PAGE welcome ================== -->
+    <?php } ?>
+
+    <!-- ================== BEGIN PAGE welcome ================== -->
     <style>@font-face {
             font-family: LeafyShade;
             src: url(<?php echo  URL.'assets/fonts/Thrones.otf'?>);
@@ -41,7 +45,7 @@
 
         #LeafyShadeP {
             font-family: LeafyShade
-        }</style><!-- ================== END PAGE welcome ================== --><?php } ?>
+        }</style><!-- ================== END PAGE welcome ================== -->
     <style>.sidebar .nav > li > a {
             font-weight: bold;
             color: white

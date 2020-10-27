@@ -210,7 +210,7 @@ class Project
     public
     function getAllMembers($project_id)
     {
-        $sql = "SELECT ID,First_name,Last_name,Avatar,Email from users where id in ( SELECT user_id from project_users WHERE project_id = :project_id) ";
+        $sql = "SELECT id,first_name,last_name,avatar,email from users where id in ( SELECT user_id from project_users WHERE project_id = :project_id) ";
         $query = $this->db->prepare($sql);
         $parameters = array(':project_id' => $project_id);
 
@@ -256,8 +256,7 @@ class Project
 
     function getAllRemarks($project_id)
     {
-
-        $sql = "SELECT * from remarks where task_id in (SELECT  id FROM tasks WHERE project_id = :project_id)";
+        $sql = "SELECT * from remarks   WHERE project_id = :project_id  ORDER BY time DESC";
         $query = $this->db->prepare($sql);
         $parameters = array(':project_id' => $project_id);
         $query->execute($parameters);

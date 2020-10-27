@@ -39,81 +39,46 @@
                     <!-- begin nav-tabs -->
                     <div class="tab-overflow overflow-right overflow-left">
                         <ul class="nav nav-tabs">
-                            <li class="prev-button" style=""><a href="javascript:;" data-click="prev-tab"
-                                                                class="text-inverse"><i
-                                            class="fa fa-arrow-left"></i></a></li>
 
-                            <?php if ($user->ID == $project->admin_id) { ?>
-
-                                <li <?php if ($toEditPage) { ?> class="active"<?php } ?> >
-                                    <a href="#nav-tab2-1" data-toggle="tab">
-                                        Edit project
-                                    </a>
-                                </li>
-                                <li class=""><a href="#nav-tab2-2" data-toggle="tab">Members list</a></li>
-                                <li class=""><a href="#nav-tab2-3" data-toggle="tab">Create a new task</a></li>
-                                <li <?php if (!$toEditPage) { ?> class="active"<?php } ?>><a
-                                            href="#nav-tab2-4" data-toggle="tab">Tasks list</a></li>
-                                <li class=""><a href="#nav-tab2-5" data-toggle="tab">Gantt graph</a></li>
-                                <li class=""><a href="#nav-tab2-6" data-toggle="tab">Remarks</a></li>
-                            <?php } else { ?>
-                                <li class="active"><a href="#nav-tab2-4" data-toggle="tab">Tasks list</a></li>
-                                <li class=""><a href="#nav-tab2-2" data-toggle="tab">Members list</a></li>
-                                <li class=""><a href="#nav-tab2-5" data-toggle="tab">Gantt graph</a></li>
-                                <li class=""><a href="#nav-tab2-6" data-toggle="tab">Remarks</a></li>
-                            <?php } ?>
+                            <li class="prev-button" style=""><a href="javascript:;" data-click="prev-tab" class="text-inverse"><i class="fa fa-arrow-left"></i></a></li>
 
 
-                            <li class="next-button" style=""><a href="javascript:;" data-click="next-tab"
-                                                                class="text-inverse"><i
-                                            class="fa fa-arrow-right"></i></a></li>
+                            <li <?php if ($page == 'project_infos') { ?> class="active"<?php } ?> ><a href="#nav-tab2-1" data-toggle="tab">Project infos</a></li>
+                            <li <?php if ($page == 'members_list') { ?> class="active"<?php } ?>><a href="#nav-tab2-2" data-toggle="tab">Members list</a></li>
+                            <li <?php if ($page == 'tasks_list') { ?> class="active"<?php } ?>><a href="#nav-tab2-4" data-toggle="tab">Tasks list</a></li>
+                            <li <?php if ($page == 'gant_graph') { ?> class="active"<?php } ?>><a href="#nav-tab2-5" data-toggle="tab">Gantt graph</a></li>
+                            <li <?php if ($page == 'remarks') { ?> class="active"<?php } ?>><a href="#nav-tab2-6" data-toggle="tab">Remarks</a></li>
+
+
+                            <li class="next-button" style=""><a href="javascript:;" data-click="next-tab" class="text-inverse"><i class="fa fa-arrow-right"></i></a></li>
+
                         </ul>
                     </div>
 
                 </div>
                 <div class="tab-content">
-                    <?php if ($user->ID == $project->admin_id) { ?>
 
-                        <div class="tab-pane fade <?php if ($toEditPage) { ?>  active in <?php } ?> "
-                             id="nav-tab2-1">
-                            <?php include APP . 'view/project/show/edit_project.php'; ?>
-                        </div>
-                        <div class="tab-pane fade" id="nav-tab2-2">
-                            <?php include APP . 'view/project/show/members_list.php'; ?>
-                        </div>
-                        <div class="tab-pane fade" id="nav-tab2-3">
-                            <?php include APP . 'view/project/show/create_task.php'; ?>
-                        </div>
-                        <div class="tab-pane fade  <?php if (!$toEditPage) { ?>  active in <?php } ?> "
-                             id="nav-tab2-4">
-                            <?php include APP . 'view/project/show/tasks_list.php'; ?>
-                        </div>
-                        <div class="tab-pane fade" id="nav-tab2-5">
-                            <?php include APP . 'view/project/show/gant_graph.php'; ?>
-                        </div>
-                        <div class="tab-pane fade" id="nav-tab2-6">
-                            <?php include APP . 'view/project/show/remaks.php'; ?>
-                        </div>
-                    <?php } else { ?>
-                        <div class="tab-pane fade" id="nav-tab2-2">
-                            <?php include APP . 'view/project/show/members_list.php'; ?>
-                        </div>
-                        <div class="tab-pane fade active in " id="nav-tab2-4">
-                            <?php include APP . 'view/project/show/tasks_list.php'; ?>
-                        </div>
-                        <div class="tab-pane fade" id="nav-tab2-5">
-                            <?php include APP . 'view/project/show/gant_graph.php'; ?>
-                        </div>
-                        <div class="tab-pane fade" id="nav-tab2-6">
-                            <?php include APP . 'view/project/show/remaks.php'; ?>
-                        </div>
-                    <?php } ?>
+                    <div class="tab-pane    <?php if  ($page == 'project_infos'){ ?>  active in <?php } ?>  "id="nav-tab2-1">
+                        <?php include APP . 'view/project/partials/show/project_infos.php'; ?>
+                    </div>
+                    <div class="tab-pane    <?php if  ($page == 'members_list'){ ?>  active in <?php } ?>" id="nav-tab2-2">
+                        <?php include APP . 'view/project/partials/commun/members_list.php'; ?>
+                    </div>
+                    <div class="tab-pane    <?php if  ($page == 'tasks_list'){ ?>   active in <?php } ?>  " id="nav-tab2-4">
+                        <?php include APP . 'view/project/partials/commun/tasks_list.php'; ?>
+                    </div>
+                    <div class="tab-pane    <?php if  ($page == 'gant_graph'){ ?>   active in <?php } ?>"   id="nav-tab2-5">
+                        <?php include APP . 'view/project/partials/commun/gant_graph.php'; ?>
+                    </div>
+                    <div class="tab-pane    <?php if  ($page == 'remarks'){ ?>       active in <?php } ?>"       id="nav-tab2-6">
+                        <?php include APP . 'view/project/partials/commun/remaks.php'; ?>
+                    </div>
 
                 </div>
             </div>
         </div>
         <!-- end row -->
-        <?php include APP . 'view/project/chat.php'; ?>
+        <?php include APP . 'view/project/partials/commun/chat.php'; ?>
 
     </div>
     <!-- end #content -->

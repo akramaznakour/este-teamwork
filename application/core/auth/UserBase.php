@@ -21,6 +21,7 @@ abstract class UserBase
         'userTableName'   => 'Users',
         'userSession'     => 'userData',
         'userDefaultData' => array(
+            'Username' => 'Guess',
             'ID'       => 0,
             'Password' => 0,
         ),
@@ -41,6 +42,10 @@ abstract class UserBase
     protected $_updates;
     /** @var Collection - default field validations */
     protected $_validations = array(
+        'Username' => array(
+            'limit' => '3-15',
+            'regEx' => '/^([a-zA-Z0-9_])+$/'
+        ),
         'Password' => array(
             'limit' => '3-15',
             'regEx' => ''

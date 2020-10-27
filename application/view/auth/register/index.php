@@ -98,20 +98,27 @@
                     <label class="control-label">Email <span class="text-danger">*</span></label>
                     <div class="row m-b-15">
                         <div class="col-md-12">
-                            <input name="Email" type="text" class="form-control" placeholder="Email address" required/>
+                            <input name="email" type="text" class="form-control" placeholder="Email address" required/>
                         </div>
                     </div>
                     <label class="control-label">Password <span class="text-danger">*</span></label>
                     <div class="row row-space-10">
                         <div class="col-md-6 m-b-15">
-                            <input name="Password" type="password" class="form-control" placeholder="Password"
+                            <input name="password" type="password" class="form-control" placeholder="Password"
                                    required/>
                         </div>
                         <div class="col-md-6 m-b-15">
-                            <input name="Password2" type="password" class="form-control" placeholder="Re-enter password"
+                            <input name="password2" type="password" class="form-control" placeholder="Re-enter password"
                                    required/>
                         </div>
                     </div>
+                    <?php if (isset($_SESSION['flash'] ) && $_SESSION['flash']!='' ){?>
+                        <div class="alert alert-danger fade in m-b-15">
+                            <strong>Error ! &nbsp; </strong>
+                            <?php echo $_SESSION['flash']; $_SESSION['flash']='';  ?>
+                            <span class="close" data-dismiss="alert">×</span>
+                        </div>
+                    <?php } ?>
 
                     <div class="register-buttons">
                         <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>

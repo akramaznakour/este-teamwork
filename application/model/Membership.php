@@ -104,7 +104,7 @@ class Membership
      */
     public function getInvitedMembers($project_id)
     {
-        $sql = "SELECT ID,First_name,Last_name,Avatar,Email FROM users where id in (SELECT user_invited_id FROM invitations where project_id =:project_id ) ";
+        $sql = "SELECT id,first_name,last_name,avatar,email FROM users where id in (SELECT user_invited_id FROM invitations where project_id =:project_id ) ";
         $query = $this->db->prepare($sql);
         $parameters = array(':project_id' => $project_id);
 
@@ -118,7 +118,7 @@ class Membership
      */
     public function getInvitedUsers($project_id)
     {
-        $sql = "SELECT ID,First_name,Last_name,Avatar,Email FROM users where id in (SELECT user_invited_id FROM invitations where project_id =:project_id AND accepted = 0) ";
+        $sql = "SELECT id,first_name,last_name,avatar,email FROM users where id in (SELECT user_invited_id FROM invitations where project_id =:project_id AND accepted = 0) ";
         $query = $this->db->prepare($sql);
         $parameters = array(':project_id' => $project_id);
 

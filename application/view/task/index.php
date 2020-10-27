@@ -15,6 +15,21 @@
     <div class="row">
         <div class="col-md-8  ">
             <!-- begin panel -->
+
+
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Progress </h4>
+                </div>
+                <div class="  clearfix p-t-10 p-10 p-b-0">
+                    <div class="progress progress-striped active ">
+                        <div class="progress-bar progress-bar-success"
+                             style="width: <?php echo $task->progress; ?>%"><?php echo $task->progress; ?>%
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             <div class="panel panel-inverse">
                 <div class="panel-heading">
                     <h4 class="panel-title">Description </h4>
@@ -24,6 +39,8 @@
                 </div>
 
             </div>
+
+
             <!-- end panel -->
         </div>
 
@@ -41,7 +58,7 @@
 
                         <li class=" width-100 ">
                             <a href="javascript:;"><img
-                                        src="<?php echo URL . 'uploads/' . $this->model['User']->getUser($responsable->responsable_id)->Avatar ?>"
+                                        src="<?php echo URL . 'uploads/' . $this->model['User']->getUser($responsable->responsable_id)->avatar ?>"
                                         alt=""></a>
                             <h5 class="username width-100 ">
                                 <?php echo $this->model['User']->getUser($responsable->responsable_id)->last_name . ' ' . $this->model['User']->getUser($responsable->responsable_id)->first_name . "<br/>"; ?>
@@ -59,7 +76,7 @@
 
 
     <?php include APP . 'view/task/remarks.php'; ?>
-    <?php include APP . 'view/project/chat.php'; ?>
+    <?php include APP . 'view/project/partials/commun/chat.php'; ?>
 
 </div>
 <!-- end row -->

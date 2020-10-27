@@ -562,8 +562,8 @@ JSGantt.GanttChart=function(pDiv, pFormat)
 	// sLine: Draw a straight line (colored one-pixel wide div)
 	this.sLine=function(x1,y1,x2,y2,pClass)
 	{
-		var vLeft=Math.min(x1,x2);
-		var vTop=Math.min(y1,y2);
+		var vLeft=Math.min(x1,x2)-1;
+		var vTop=Math.min(y1,y2)+10;
 		var vWid=Math.abs(x2-x1)+1;
 		var vHgt=Math.abs(y2-y1)+1;
 

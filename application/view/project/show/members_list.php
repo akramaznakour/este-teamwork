@@ -13,7 +13,7 @@
     <?php if ($user->ID == $project->admin_id) { ?>
 
         <hr/>
-        <h4 class="p-b-20">Waiting for accepting the invitation</h4>
+        <h4 class="p-b-20">In waitung for accting invitation</h4>
 
         <?php foreach ($invited_users as $member) { ?>
 

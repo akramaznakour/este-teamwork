@@ -1,6 +1,5 @@
 <?php
 
-use ptejada\uFlex\User;
 
 /**
  * Class Memberships
@@ -13,10 +12,10 @@ class Memberships extends Controller
      */
     public function invite($project_id = 1)
     {
-        $user = new  User();
-        include APP . 'core/auth/validations/auth_validation.php';
+        
+        include APP . 'core/auth/auth_validation.php';
         $project = $this->model['Project']->getProject($project_id);
-        if ($project->admin_id != $user->ID)
+        if ($project->admin_id != $user->id)
             header('location: ' . URL . 'projects/index');
         else {
 
@@ -32,12 +31,12 @@ class Memberships extends Controller
      */
     public function accept($invitation_id)
     {
-        $user = new  User();
-        include APP . 'core/auth/validations/auth_validation.php';
+        
+        include APP . 'core/auth/auth_validation.php';
         $invitation = $this->model['Membership']->getInvitation($invitation_id);
         $project = $this->model['Project']->getProject($invitation->project_id);
 
-        if ($invitation->user_invited_id != $user->ID)
+        if ($invitation->user_invited_id != $user->id)
                header('location: ' . URL . 'projects/index');
         else {
 
@@ -54,12 +53,12 @@ class Memberships extends Controller
      */
     public function refuse($invitation_id)
     {
-        $user = new  User();
-        include APP . 'core/auth/validations/auth_validation.php';
+        
+        include APP . 'core/auth/auth_validation.php';
         $invitation = $this->model['Membership']->getInvitation($invitation_id);
         $project = $this->model['Project']->getProject($invitation->project_id);
 
-        if ($invitation->user_invited_id != $user->ID)
+        if ($invitation->user_invited_id != $user->id)
             //  header('location: ' . URL . 'projects/index');
             echo 'her';
         else {
@@ -76,12 +75,12 @@ class Memberships extends Controller
     public function remove($project_id)
     {
         print_r($_POST);
-        $user = new  User();
-        include APP . 'core/auth/validations/auth_validation.php';
+        
+        include APP . 'core/auth/auth_validation.php';
 
         $project = $this->model['Project']->getProject($project_id);
 
-        if ($project->admin_id != $user->ID)
+        if ($project->admin_id != $user->id)
             header('location: ' . URL . 'projects/index');
         else {
             if ($this->model['Project']->isMember($_POST['member_to_remove'], $project_id))

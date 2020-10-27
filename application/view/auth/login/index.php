@@ -85,22 +85,30 @@
             <div class="login-content">
                 <form method="POST" class="margin-bottom-0"
                       action="<?php echo URL . 'auth/login' ?>">
-                    <div class="form-group m-b-15">
-                        <input name="Username" type="email" class="form-control input-lg" placeholder="Email Address"
+                    <?php if (isset($_SESSION['success'] ) && $_SESSION['flash']!='' ){?>
+                        <div class="alert alert-success fade in m-b-15">
+                            <strong>Success ! &nbsp; </strong>
+                            <?php echo $_SESSION['flash']; $_SESSION['flash']='';  ?>
+                            <span class="close" data-dismiss="alert">×</span>
+                        </div>
+                    <?php } ?><div class="form-group m-b-15">
+                        <input name="email" type="email" class="form-control input-lg" placeholder="Email Address"
                                required/>
                     </div>
                     <div class="form-group m-b-15">
-                        <input name="Password" type="password" class="form-control input-lg" placeholder="Password"
+                        <input name="password" type="password" class="form-control input-lg" placeholder="Password"
                                required/>
                     </div>
-                    <div class="checkbox m-b-30">
-                        <label>
-                            <input name="auto" type="checkbox"/> Remember Me
-                        </label>
-                    </div>
+                    <?php if (isset($_SESSION['flash'] ) && $_SESSION['flash']!='' ){?>
+                        <div class="alert alert-danger fade in m-b-15">
+                            <strong>Error ! &nbsp; </strong>
+                            <?php echo $_SESSION['flash']; $_SESSION['flash']='';  ?>
+                            <span class="close" data-dismiss="alert">×</span>
+                        </div>
+                    <?php } ?>
                     <div class="login-buttons">
                         <button type="submit" style="background-color: #1974be"
-                                class="btn btn-success btn-block btn-lg">Sign me in
+                                class="btn btn-success btn-block btn-lg">Sign  In
                         </button>
                     </div>
                     <div class="m-t-20 m-b-40 p-b-40 text-inverse">

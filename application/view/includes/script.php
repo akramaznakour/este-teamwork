@@ -1,11 +1,11 @@
 <script>
     var url = "<?php echo URL; ?>";
     var project_id = "<?php echo $project->id; ?>";
-    var user_id = "<?php echo $user->ID; ?>";
+    var user_id = "<?php echo $user->id; ?>";
 </script>
 
 
-<?php if (isset($_GET['url']) && (substr($_GET['url'], 0, 13) == 'projects/show' || substr($_GET['url'], 0, 10) == 'tasks/show')) {
+<?php if ( true) {
     require APP . 'view/includes/jsgantt.php';
 } ?>
 
@@ -29,14 +29,15 @@
 </script>
 
 
-<?php if (isset($_GET['url']) && (substr($_GET['url'], 0, 13) == 'projects/show' || substr($_GET['url'], 0, 10) == 'tasks/show')) { ?>
-    <!-- ================== BEGIN PAGE projects/show ================== --><?php if ($project->admin_id == $user->ID) { ?>
+<?php if (true) { ?>
+    <!-- ================== BEGIN PAGE projects/show ================== --><?php if (true) { ?>
         <link href="<?php echo URL; ?>assets/plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet"/>
         <script src="<?php echo URL; ?>assets/plugins/bootstrap-wizard/js/bwizard.js"></script>
         <script src="<?php echo URL; ?>assets/js/form-wizards.demo.min.js"></script>
         <script src="<?php echo URL; ?>assets/js/recherche.js "></script>
         <script src="<?php echo URL; ?>assets/js/task.js"></script><?php } ?>
-    <script src="<?php echo URL; ?>assets/js/chat.js"></script><!-- ================== END PAGE projects/show ================== -->
+    <script src="<?php echo URL; ?>assets/js/chat.js"></script>
+    <!-- ================== END PAGE projects/show ================== -->
 <?php } ?>
 
 

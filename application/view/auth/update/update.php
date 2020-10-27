@@ -43,15 +43,15 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Email</label>
+                            <label class="col-md-4 control-label">email</label>
                             <div class="col-md-8">
-                                <input name="Email" type="text" required value="<?php echo $user->Email ?>" class="form-control"   />
+                                <input name="email" type="text" required value="<?php echo $user->email ?>" class="form-control"   />
                             </div>
                         </div>
                         <div class="form-group"  >
                             <label class="col-md-4 control-label">Avatar</label>
                             <div class="col-md-8">
-                                <input  type="file"  name="Avatar" class="file" >
+                                <input  type="file"  name="avatar" class="file" >
                             </div>
 
                         </div>

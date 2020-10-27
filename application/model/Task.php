@@ -25,9 +25,31 @@ class Task
         return $query->fetchAll();
     }
 
+    public function getGroupMinTask($parentTask_id)
+    {
+        $sql = "select * from tasks where parent = ".$parentTask_id." and start_date = (select min(start_date) from tasks where parent = ".$parentTask_id.") limit 1";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetch();
+    }
+    public function getGroupMaxTask($parentTask_id)
+    {
+        $sql = "select * from tasks where parent = ".$parentTask_id." and end_date = (select max(end_date) from tasks where parent = ".$parentTask_id.") limit 1";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetch();
+    }
+    public function getSubTasks($prentTask_id)
+    {
+        $sql = "select * from tasks  where parent = " . $prentTask_id ;
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     public function getAllRemarks($task_id)
     {
-        $sql = "select * from remarks  where task_id = " . $task_id ;
+        $sql = "select * from remarks  where task_id = " . $task_id;
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -100,6 +122,14 @@ class Task
 
     }
 
+    public function turnIntoTask($task_id)
+    {
+        $sql = "UPDATE tasks SET tasks.isGroup = 0 , tasks.style = 'gtaskblue'  WHERE id = " . $task_id;
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+    }
+
 
     public function addTask($name, $start_date, $end_date, $style, $link, $mile, $resources, $responsables, $progress, $isGroup, $parent, $open, $depend, $caption, $note, $project_id)
     {
@@ -110,17 +140,20 @@ class Task
 
         $task_id = 0;
 
-        $sql = "SELECT id from tasks where  name = :name AND start_date = :start_date  AND end_date = :end_date AND project_id = :project_id  AND project_id = :project_id  ";
+        $sql = "SELECT * from tasks where  name = :name AND start_date = :start_date  AND end_date = :end_date AND project_id = :project_id  AND project_id = :project_id  ";
         $query = $this->db->prepare($sql);
         $parameters = array(':name' => $name, ':start_date' => $start_date, ':end_date' => $end_date, ':project_id' => $project_id);
         $query->execute($parameters);
+        $task = "";
         foreach ($query->fetchAll() as $row)
-            $task_id = $row->id;
+            $task = $row;
 
         /**********************/
 
-        $this->addResponsables($task_id, $responsables);
-        $this->addResources($task_id, $resources);
+        $this->addResponsables($task->id, $responsables);
+        $this->addResources($task->id, $resources);
+
+        return $task;
     }
 
 
@@ -159,6 +192,7 @@ class Task
         $this->deleteAllResources($task_id);
         $this->addResources($task_id, $resources);
     }
+
     public function updateResponsables($task_id, $responsables)
     {
         $this->deleteAllResponsables($task_id);
@@ -170,10 +204,27 @@ class Task
     {
         $sql = "UPDATE `tasks` SET  `name`= :name,`start_date`= :start_date,`end_date`= :end_date,`style`= :style,`link`= :link,`mile`= :mile,`isGroup`= :isGroup,`parent`= :parent,`open`= :open ,`depend`= :depend,`caption`= :caption,`note`= :note,`project_id`= :project_id WHERE id = :task_id ";
         $query = $this->db->prepare($sql);
-        $parameters = array(':name' => $name, ':start_date' => $start_date, ':end_date' => $end_date, ':style' => $style, ':link' => $link, ':mile' => $mile,  ':isGroup' => $isGroup, ':parent' => $parent, ':open' => $open, ':depend' => $depend, ':caption' => $caption, ':note' => $note, ':project_id' => $project_id, ':task_id' => $task_id);
+        $parameters = array(':name' => $name, ':start_date' => $start_date, ':end_date' => $end_date, ':style' => $style, ':link' => $link, ':mile' => $mile, ':isGroup' => $isGroup, ':parent' => $parent, ':open' => $open, ':depend' => $depend, ':caption' => $caption, ':note' => $note, ':project_id' => $project_id, ':task_id' => $task_id);
         $query->execute($parameters);
         $this->updateResources($task_id, $resources);
         $this->updateResponsables($task_id, $responsables);
+    }
+
+    public function updateStartDate($start_date, $task_id)
+    {
+        $sql = "UPDATE `tasks` SET   `start_date`= :start_date WHERE id = :task_id ";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':start_date' => $start_date, ':task_id' => $task_id);
+        print_r($parameters);
+        $query->execute($parameters);
+    }
+
+    public function updateEndDate($end_date, $task_id)
+    {
+        $sql = "UPDATE `tasks` SET   `end_date`= :end_date WHERE id = :task_id ";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':end_date' => $end_date, ':task_id' => $task_id);
+        $query->execute($parameters);
     }
 
     public function updateTaskProgress($progress, $task_id)
@@ -213,6 +264,7 @@ class Task
         $query->execute();
 
     }
+
     public function deleteAllResponsables($task_id)
     {
         $sql = "DELETE FROM responsables WHERE task_id = " . $task_id;
@@ -255,11 +307,11 @@ class Task
         $query->execute($parameters);
     }
 
-    public function addRemarK($content, $user_id, $task_id)
+    public function addRemarK($content, $user_id, $project_id, $task_id)
     {
-        $sql = "INSERT INTO remarks (content,user_id,task_id) VALUES (:content,:user_id,:task_id)";
+        $sql = "INSERT INTO remarks (content,user_id,project_id,task_id) VALUES (:content,:user_id,:project_id,:task_id)";
         $query = $this->db->prepare($sql);
-        $parameters = array(':content' => $content, ':user_id' => $user_id, ':task_id' => $task_id);
+        $parameters = array(':content' => $content, ':user_id' => $user_id, ':project_id' => $project_id, ':task_id' => $task_id);
         $query->execute($parameters);
     }
 }

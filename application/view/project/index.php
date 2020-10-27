@@ -36,7 +36,7 @@
                             <tr>
                                 <th>Project</th>
                                 <th>admin</th>
-                                <th>description</th>
+                                <th style="width: 250px">description</th>
                                 <th>Start date</th>
                                 <th>End date</th>
                                 <th>members</th>
@@ -57,7 +57,7 @@
                                     <td>
                                         <div class="p-b-5">
                                             <img style="height: 20px;width: 20px"
-                                                 src="<?php echo URL . 'uploads/' . $this->model['User']->getUser($project->admin_id)->Avatar; ?>"
+                                                 src="<?php echo URL . 'uploads/' . $this->model['User']->getUser($project->admin_id)->avatar; ?>"
                                                  alt="user"
                                                  class="profile-pic "/>
                                             <?php echo $this->model['User']->getUser($project->admin_id)->first_name . '  ' . $this->model['User']->getUser($project->admin_id)->last_name ?>
@@ -65,9 +65,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <span>
+                                        <p class="text-justify">
                                             <?php echo $project->description; ?>
-                                        </span>
+                                        </p>
                                     </td>
 
                                     <td>
@@ -81,10 +81,10 @@
                                         <?php foreach ($this->model['Project']->getAllMembers($project->id) as $member) { ?>
                                             <div class="p-b-5">
                                                 <img style="height: 20px;width: 20px"
-                                                     src="<?php echo URL . 'uploads/' . $member->Avatar; ?>"
+                                                     src="<?php echo URL . 'uploads/' . $member->avatar; ?>"
                                                      alt="user"
                                                      class="profile-pic "/>
-                                                <?php echo $member->First_name . '  ' . $member->Last_name ?>
+                                                <?php echo $member->first_name . '  ' . $member->last_name ?>
                                                 &nbsp;<br/>
                                             </div>
                                         <?php } ?>
@@ -95,12 +95,12 @@
                                     </td>
                                     <td class="btn-block">
                                         <a class="badge badge-success "
-                                           href="<?php echo URL . 'projects/show/' . $project->id ?>">
+                                           href="<?php echo URL . 'projects/show/' . $project->id .'/tasks_list'  ?> ">
                                             SHOW
-                                        </a> <?php if ($project->admin_id == $user->ID) { ?>
+                                        </a> <?php if ($project->admin_id == $user->id) { ?>
 
                                             <a class="badge badge-warning "
-                                               href="<?php echo URL . 'projects/show/' . $project->id . '/true' ?>">
+                                               href="<?php echo URL . 'projects/edit/' . $project->id . '/edit_project' ?>">
                                                 EDIT
                                             </a>
                                             <a href="#modal-alert" class="badge badge-danger"

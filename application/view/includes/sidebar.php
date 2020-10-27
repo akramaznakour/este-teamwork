@@ -7,7 +7,7 @@
             <li class="nav-profile">
                 <div class="image">
                     <a href="javascript:;"><img style="width: 100%;height: 100%;"
-                                                src="<?php echo URL . 'uploads/' . $user->Avatar; ?>" alt=""/></a>
+                                                src="<?php echo URL . 'uploads/' . $user->avatar; ?>" alt=""/></a>
                 </div>
                 <div class="info">
                     Welcome

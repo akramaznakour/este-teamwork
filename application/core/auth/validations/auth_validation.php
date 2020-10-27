@@ -16,7 +16,5 @@ $completedProjectsAdminOf = $this->model['Project']->getAllCompletedProjectsAdmi
 
 $invitations = $this->model['Membership']->getAllInvitations($user->getProperty('ID'));
 
-$notifications = $this->model['Notification']->getAllNotifications($user->getProperty('ID'));
-
 
 $flash = array();

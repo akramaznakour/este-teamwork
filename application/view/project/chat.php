@@ -1,4 +1,4 @@
-<div class="col-md-4  " style="z-index:99;">
+<div class="col-md-4  ">
     <!-- begin panel -->
     <div class=" panel-inverse chat">
         <div id="chat-box-head" class="panel-heading">
@@ -9,7 +9,7 @@
             <div>
                 <ul id="chat" class="chats">
 
- 
+
                 </ul>
             </div>
 

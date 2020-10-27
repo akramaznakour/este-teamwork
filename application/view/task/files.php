@@ -37,7 +37,7 @@
         </ul>
         <div class="panel-body">
 
-            <?php if ($this->model['Task']->isResponsableOf($task_id, $user->ID)) { ?>
+            <?php if ($this->model['Task']->isResponsableOf($task_id, $user->id)) { ?>
 
             <form class="p-0 m-0" action="<?php echo URL . 'tasks/uploadFiles/' . $task->id ?>" method="POST"
                   enctype="multipart/form-data">
