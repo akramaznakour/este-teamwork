@@ -15,11 +15,17 @@
     <!-- Bootstrap  CSS -->
     <link href="<?php echo URL; ?>css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
+
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
     <link href="<?php echo URL; ?>css/style.css" rel="stylesheet">
 
     <?php if (isset($_GET['url']) && (substr($_GET['url'], 0, 13) == 'projects/show')) { ?>
         <link href="<?php echo URL; ?>jsgantt/jsgantt.css" rel="stylesheet">
         <script src="<?php echo URL; ?>jsgantt/jsgantt.js"></script>
     <?php } ?>
+
 
 </head>

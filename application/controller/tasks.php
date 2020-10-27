@@ -37,14 +37,13 @@ class Tasks extends Controller
                 $resources = '';
                 $isGroup = '0';
 
-                foreach ($_POST['resource'] as $resource) {
+                foreach ($_POST['resources'] as $resource) {
                     $resources .= $resource . '  ';
                 }
 
                 if ($_POST['parent'] != 0) {
 
                     $parentTask = $this->model['Task']->getTask($_POST['parent']);
-                    print_r($parentTask);
                     if ($parentTask->group == 0) {
                         $this->model['Task']->turnIntoGroup($parentTask->id);
                     }
@@ -55,6 +54,45 @@ class Tasks extends Controller
             }
         }
         header('location: ' . URL . 'projects/show/' . $project_id);
+    }
+
+    public function update($task_id = 1)
+    {
+        $user = new  User();
+        include APP . 'core/auth/validations/auth_validation.php';
+
+        $task = $this->model['Task']->getTask($task_id);
+        $project = $this->model['Project']->getProject($task->project_id);
+        $members = $this->model['Project']->getAllMembers($task->project_id);
+
+        if ($project->admin_id != $user->ID)
+            header('location: ' . URL . 'projects/');
+        else {
+
+            if (isset($_POST["submit_update_task"])) {
+
+                $style = 'gtaskblue';
+                $mile = 0;
+                $resources = '';
+                $isGroup = '0';
+
+                foreach ($_POST['resources'] as $resource) {
+                    $resources .= $resource . '   ';
+                }
+
+                if ($_POST['parent'] != 0) {
+
+                    $parentTask = $this->model['Task']->getTask($_POST['parent']);
+                    if ($parentTask->group == 0) {
+                        $this->model['Task']->turnIntoGroup($parentTask->id);
+                    }
+                }
+
+                $this->model['Task']->updateTask($_POST["name"], $_POST["actual_start"], $_POST["actual_end"], $style, 0, $mile, $resources, $_POST['responsable_id'], '0', $isGroup, $_POST['parent'], '1', $_POST["depend"], '', $_POST["note"], $task->project_id, $task->id);
+
+            }
+        }
+        //     header('location: ' . URL . 'projects/show/' . $task->project_id);
     }
 
 

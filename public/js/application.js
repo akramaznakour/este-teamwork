@@ -63,4 +63,13 @@ $(document).ready(function () {
         });
     });
 
+
+    $('.btn_hidden_form').on('click', function () {
+        var form_id = $(this).attr('data-form');
+        $('#' + form_id).fadeToggle();
+
+        $(this).html($(this).html().includes('EDIT') ? 'CLOSE' : 'EDIT');
+
+    })
+
 });

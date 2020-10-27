@@ -181,7 +181,7 @@
                                                                     <label class="form-control-label"
                                                                            for="name">resource</label>
                                                                     <input class="form-control"
-                                                                           name="resource[]"
+                                                                           name="resources[]"
                                                                            type="text">
                                                                 </div>
                                                             </div>
@@ -258,7 +258,7 @@
                             <div class="tab-pane p-20 small" id="TASKS_LIST" role="tabpanel">
                                 <br/>
 
-                                <div class="table-responsive small">
+                                <div class="table-responsive table-striped ">
                                     <table class="table ">
                                         <thead>
                                         <tr>
@@ -277,10 +277,11 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <tr></tr>
                                         <?php foreach ($tasks
 
                                                        as $task) { ?>
-                                            <tr>
+                                            <tr class="small">
                                                 <td><?php echo $task->name; ?></td>
 
                                                 <td><?php echo $task->actual_start; ?></td>
@@ -288,10 +289,12 @@
                                                 <td><?php echo $this->model['User']->getUser($task->responsable_id)->first_name . ' ' . $this->model['User']->getUser($task->responsable_id)->last_name; ?></td>
 
                                                 <td>
-                                                    <?php if ($task->comp < 100 && $task->comp != 0 && $task->group == 0) { ?>
+                                                    <?php if ($task->comp < 100 && $task->comp != 0 && $task->group != 1) { ?>
                                                         <span class="btn btn-sm btn-info">in progress</span>
                                                     <?php } elseif ($task->comp == '100') { ?>
                                                         <span class="btn btn-sm btn-success">finished</span>
+                                                    <?php } elseif ($task->comp == 0 && $task->group != 1) { ?>
+                                                        <span class="btn btn-sm btn-primary">just initiated</span>
                                                     <?php } ?>
                                                 </td>
                                                 <td>
@@ -325,12 +328,213 @@
                                                 <td><?php echo $task->resources; ?></td>
                                                 <?php if ($user->ID == $project->admin_id) { ?>
 
-                                                    <td><a href="" class="btn btn-danger btn-sm">EDIT</a></td>
+                                                    <td>
+                                                        <button data-form="hidden_form_<?php echo $task->id; ?>"
+                                                                class="btn_hidden_form btn btn-danger btn-sm">EDIT
+                                                        </button>
+                                                    </td>
                                                 <?php } ?>
 
                                             </tr>
 
+                                            <tr id="hidden_form_<?php echo $task->id; ?>" class="hidden the_tr_form">
+                                                <td colspan="8">
+                                                    <form method="post" class="registration-form container"
+                                                          action="<?php echo URL . 'tasks/update/' . $task->id; ?>"
+                                                          style="text-align: left">
+                                                        <fieldset>
+                                                            <div class="form-top">
+                                                                <div class="form-top-left ">
+                                                                    <h3> the parameters</h3>
+                                                                    <p> description to the parameters</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-bottom">
+
+                                                                <div id="line_form" class="row">
+                                                                    <div class="col-lg-6">
+
+                                                                        <div class="form-group">
+                                                                            <label class="form-control-label"
+                                                                                   for="name">Task
+                                                                                name</label>
+                                                                            <input name="name"
+                                                                                   class="form-control"
+                                                                                   value="<?php echo $task->name ?>"
+                                                                                   type="text">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-3">
+
+                                                                        <div class="form-group">
+                                                                            <label class="form-control-label"
+                                                                                   for="actual_start">Start
+                                                                                date</label>
+                                                                            <input name="actual_start"
+                                                                                   value="<?php echo $task->actual_start ?>"
+
+                                                                                   class="form-control"
+                                                                                   type="date">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-3">
+
+                                                                        <div class="form-group">
+                                                                            <label class="form-control-label"
+
+                                                                                   for="actual_end">End
+                                                                                date</label>
+                                                                            <input name="actual_end"
+                                                                                   value="<?php echo $task->actual_end ?>"
+
+                                                                                   class="form-control"
+                                                                                   type="date">
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+
+
+                                                                <div class="form-group">
+                                                                    <label class="form-control-label">Description </label>
+                                                                    <textarea name="note"
+                                                                              style="height: 100px"
+                                                                              class=" form-control" rows="8"
+                                                                              cols="50"><?php echo $task->note ?></textarea>
+
+                                                                </div>
+                                                                <button type="button"
+                                                                        class="btn btn-next btn-success pull-right">
+                                                                    Next
+                                                                </button>
+                                                            </div>
+                                                        </fieldset>
+
+                                                        <fieldset>
+                                                            <div class="form-top">
+                                                                <div class="form-top-left">
+                                                                    <h3>The resources</h3>
+                                                                    <p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-bottom">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label class="form-control-label"
+                                                                                   for="name">lead
+                                                                                manager </label>
+                                                                            <select name="responsable_id"
+
+                                                                                    class="form-control">
+                                                                                <?php foreach ($members as $member) { ?>
+                                                                                    <option value="<?php echo $member->ID; ?>" <?php if ($member->ID == $task->responsable_id) { ?> selected="selected" <?php } ?> ><?php echo $member->First_name . ' ' . $member->Last_name ?></option>
+                                                                                <?php } ?>
+                                                                            </select>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="resources_tab" class="row">
+
+                                                                    <?php foreach (explode('    ', $task->resources) as $resource) { ?>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label class="form-control-label"
+                                                                                       for="name">resource</label>
+                                                                                <input class="form-control"
+                                                                                       name="resources[]"
+                                                                                       value="<?php echo $resource ?>"
+                                                                                       type="text">
+                                                                            </div>
+                                                                        </div>
+
+                                                                    <?php } ?>
+
+                                                                </div>
+                                                                <button id="add_resource" type="button"
+                                                                        class="btn btn-primary"><span
+                                                                            class="fa fa-plus-circle pull-right">&nbsp;Add resources</span>
+                                                                </button>
+
+                                                                <br/><br/>
+                                                                <button type="button"
+                                                                        class="btn btn-previous  btn-danger ">Previous
+                                                                </button>
+                                                                <button type="button"
+                                                                        class="btn btn-next btn-success pull-right">
+                                                                    Next
+                                                                </button>
+
+
+                                                            </div>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <div class="form-top">
+                                                                <div class="form-top-left">
+                                                                    <h3> Lorem ipsum dolor sit amet</h3>
+                                                                    <p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-bottom">
+                                                                <div class="row">
+
+                                                                    <div class="col-lg-6">
+
+                                                                        <div class="form-group">
+                                                                            <label class="form-control-label"
+                                                                                   for="parent">parent
+                                                                                task</label>
+
+                                                                            <select name="parent"
+                                                                                    class="form-control">
+                                                                                <option value="0" <?php if ($task->parent == '0') { ?> selected="selected" <?php } ?>>
+                                                                                    Non
+                                                                                </option>
+                                                                                <?php foreach ($tasks as $ta) { ?>
+                                                                                    <option value="<?php echo $ta->id; ?>" <?php if ($ta->id == $task->parent) { ?> selected="selected" <?php } ?> > <?php echo $ta->name ?></option>
+                                                                                <?php } ?>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+
+                                                                        <div class="form-group">
+                                                                            <label class="form-control-label"
+                                                                                   for="depend">depend</label>
+                                                                            <select name="depend"
+                                                                                    class="form-control">
+                                                                                <option value="0" <?php if ($task->depend == '0') { ?> selected="selected" <?php } ?>>
+                                                                                    Non
+                                                                                </option>
+                                                                                <?php foreach ($tasks as $ta) { ?>
+                                                                                    <option value="<?php echo $ta->id; ?>" <?php if ($ta->id == $task->depend) { ?> selected="selected" <?php } ?> > <?php echo $ta->name ?></option>
+                                                                                <?php } ?>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <button type="button"
+                                                                        class="btn btn-previous btn-danger">
+                                                                    Previous
+                                                                </button>
+                                                                <button type="submit" name="submit_update_task"
+                                                                        class="btn btn-success pull-right">Submit
+                                                                </button>
+                                                            </div>
+                                                        </fieldset>
+                                                    </form>
+                                                </td>
+                                            </tr>
+
                                         <?php } ?>
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -358,3 +562,5 @@
 
 
     </div>
+
+</div>
