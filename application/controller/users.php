@@ -2,9 +2,16 @@
 
 use ptejada\uFlex\User;
 
+/**
+ * Class Users
+ */
 class Users extends Controller
 {
-    public function index($project_id,$q)
+    /**
+     * @param $project_id
+     * @param $q
+     */
+    public function index($project_id, $q)
     {
         $user = new  User();
         include APP . 'core/auth/validations/auth_validation.php';

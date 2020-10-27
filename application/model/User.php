@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class User
+ */
 class User
 {
     /**
@@ -28,6 +31,11 @@ class User
     }
 
 
+    /**
+     * @param $project_id
+     * @param $q
+     * @return mixed
+     */
     public function getUninvitedUsers($project_id, $q)
     {
         $sql = "SELECT ID,First_name,Last_name,Avatar,Email FROM users where email like '%" . $q . "%' and  ID not in (SELECT user_invited_id from invitations where project_id = " . $project_id . " ) and ID not in (SELECT user_id from project_users where project_id = " . $project_id . ")";
@@ -38,6 +46,10 @@ class User
         return $query->fetchAll();
     }
 
+    /**
+     * @param $user_id
+     * @return mixed
+     */
     public function getUser($user_id)
     {
         $sql = "SELECT * FROM users WHERE id = :user_id";
@@ -48,6 +60,9 @@ class User
         return $query->fetch();
     }
 
+    /**
+     * @param $user_id
+     */
     public function activateUser($user_id)
     {
         $sql = "UPDATE users SET Activated =1 WHERE id = :user_id";

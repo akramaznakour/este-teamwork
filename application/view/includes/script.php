@@ -1,29 +1,32 @@
-<!-- All Jquery -->
-<script src="<?php echo URL; ?>js/lib/jquery/jquery.min.js"></script>
+<!-- ================== BEGIN BASE JS ================== -->
+<script src="<?php echo URL; ?>assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+<script src="<?php echo URL; ?>assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+<script src="<?php echo URL; ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-<script src="<?php echo URL; ?>js/bootstrap.min.js"></script>
+<![endif]-->
+<script src="<?php echo URL; ?>assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- ================== END BASE JS ================== -->
 
-<!-- slimscrollbar scrollbar JavaScript -->
-<script src="<?php echo URL; ?>js/jquery.slimscroll.js"></script>
+<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+<script src="<?php echo URL; ?>assets/plugins/bootstrap-wizard/js/bwizard.js"></script>
+<script src="<?php echo URL; ?>assets/js/form-wizards.demo.min.js"></script>
+<script src="<?php echo URL; ?>assets/js/apps.min.js"></script>
+<!-- ================== END PAGE LEVEL JS ================== -->
+<script>
+    $(document).ready(function () {
+        App.init();
+        FormWizard.init();
+    });
+</script>
 
-
-<!--stickey kit -->
-<script src="<?php echo URL; ?>js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-
-<!--Custom JavaScript -->
-<script src="<?php echo URL; ?>js/custom.min.js"></script>
-
-<script src="<?php echo URL; ?>js/application.js"></script>
-
-<!--Menu sidebar -->
-<script src="<?php echo URL; ?>js/sidebarmenu.js"></script>
 
 <?php if (isset($_GET['url']) && substr($_GET['url'], 0, 13) == 'projects/show') { ?>
-    <script src="<?php echo URL; ?>js/formTab.js"></script>
-    <script src="<?php echo URL; ?>js/chat.js "></script>
     <script src="<?php echo URL; ?>js/recherche.js "></script>
+    <script src="<?php echo URL; ?>js/chat.js"></script>
+
 <?php } ?>
 
-</body>
+<script src="<?php echo URL; ?>js/Application.js"></script>
 
+</body>
 </html>

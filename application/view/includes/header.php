@@ -1,60 +1,43 @@
-<body class="fix-header fix-sidebar">
-<!-- Preloader - style you can find in spinners.css -->
-<div class="preloader">
-    <svg class="circular" viewBox="25 25 50 50">
-        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-    </svg>
-</div>
-<!-- Main wrapper  -->
-<div id="main-wrapper">
-    <div class="header">
-        <nav class="navbar top-navbar navbar-expand-md navbar-light">
-            <!-- Logo -->
+<!-- begin #page-loader -->
+<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+<!-- end #page-loader -->
+
+<!-- begin #page-container -->
+<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+    <!-- begin #header -->
+    <div id="header" class="header navbar navbar-default navbar-fixed-top">
+        <!-- begin container-fluid -->
+        <div class="container-fluid">
+            <!-- begin mobile sidebar expand / collapse button -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="<?php echo URL; ?>">
-                    <!-- Logo icon
-                    <b><img src="<?php echo URL; ?>images/logo.png" alt="homepage" class="dark-logo"/></b>
-                    <!--End Logo icon -->
-                    <!-- Logo text
-                    <span><img src="<?php echo URL; ?>images/logo-text.png" alt="homepage" class="dark-logo"/></span>-->
-                </a>
+                <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> Color Admin</a>
+                <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             </div>
-            <!-- End Logo -->
-            <div class="navbar-collapse">
-                <!-- toggle and nav items -->
-                <ul class="navbar-nav mr-auto mt-md-0">
-                    <!-- This is  -->
-                    <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up text-muted  "
-                                            href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>
-                    <li class="nav-item m-l-10"><a class="nav-link sidebartoggler hidden-sm-down text-muted  "
-                                                   href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+            <!-- end mobile sidebar expand / collapse button -->
 
+            <!-- begin header navigation right -->
+            <ul class="nav navbar-nav navbar-right">
 
-                </ul>
-                <!-- User profile and search -->
-                <ul class="navbar-nav my-lg-0">
-
-                    <!-- Profile -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false"><img src="<?php echo URL .'uploads/'. $user->Avatar; ?>"
-                                                                           alt="user" class="profile-pic"/></a>
-                        <div class="dropdown-menu dropdown-menu-right animated zoomIn">
-                            <ul class="dropdown-user">
-                                <li><a href="<?php echo URL . 'auth/profile' ?>"><i class="ti-user"></i> Profile</a>
-                                </li>
-                                <li role="separator" class="divider"></li>
-
-                                <li><a href="<?php echo URL . 'auth/edit' ?>"><i class="ti-settings"></i> Setting</a>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="<?php echo URL . 'auth/logout' ?>"><i class="fa fa-power-off"></i>
-                                        Logout</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                <li class="dropdown navbar-user">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="<?php echo URL . 'uploads/' . $user->Avatar; ?>" alt=""/>
+                        <span class="hidden-xs"><?php echo $user->first_name . ' ' . $user->last_name; ?> </span> <b
+                                class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInLeft">
+                        <li class="arrow"></li>
+                        <li><a href="<?php echo URL . 'auth/edit' ?>">Edit Profile</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?php echo URL . 'auth/logout' ?>">Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- end header navigation right -->
+        </div>
+        <!-- end container-fluid -->
     </div>
-    <!-- End header header -->
+    <!-- end #header -->

@@ -10,7 +10,6 @@ class Home extends Controller
 
         include APP . 'core/auth/validations/auth_validation.php';
 
-        //VIEW
         require APP . 'view/includes/head.php';
         require APP . 'view/includes/header.php';
         require APP . 'view/includes/sidebar.php';

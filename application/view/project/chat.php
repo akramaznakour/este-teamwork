@@ -1,40 +1,30 @@
-
-<div class="row">
-
-
-    <div class="main-section">
-        <div class="row border-chat">
-            <div class="col-md-12 col-sm-12 col-xs-12 first-section">
-                <div class="row">
-                    <div class="col-md-8 col-sm-6 col-xs-6 left-first-section">
-                        <p>Chat -- <?php echo $project->title;?>    </p>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6 right-first-section">
-                        <a href="#"><i class="fa fa-minus" aria-hidden="true"></i></a>
-
-                    </div>
-                </div>
-            </div>
+<div class="col-md-4  ">
+    <!-- begin panel -->
+    <div class=" panel-inverse chat">
+        <div id="chat-box-head" class="panel-heading">
+            <h4 class="panel-title">Chat -- <?php echo $project->title; ?> <span class="label label-success pull-right"></span>
+            </h4>
         </div>
-        <div class="row border-chat small">
-            <div class="col-md-12 col-sm-12 col-xs-12 second-section">
-                <div class="chat-section">
-                    <ul id="chat">
+        <div id="body-chat"  class="panel-body bg-silver" style="overflow: auto;height: 300px;display: none">
+            <div>
+                <ul id="chat" class="chats">
 
 
-                    </ul>
-                </div>
+                </ul>
             </div>
+
         </div>
-        <div class="row border-chat">
-            <div class="col-md-12 col-sm-12 col-xs-12 third-section">
-                <div class="text-bar">
-                    <input id="chat-input" type="text" placeholder="Write messege"><a id="chat-btn"><i
-                            class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        <div id="footer-chat" style="display: none" class="panel-footer">
+            <form name="send_message_form" data-id="message-form">
+                <div class="input-group">
+                    <input id="chat-input" class="form-control input-sm" name="message" placeholder="Enter your message here."
+                           type="text">
+                    <span class="input-group-btn">
+                                        <button id="chat-btn" class="btn btn-primary btn-sm" type="button">Send</button>
+                                    </span>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-
-
+    <!-- end panel -->
 </div>
