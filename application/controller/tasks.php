@@ -23,23 +23,29 @@ class Tasks extends Controller
             header('location: ' . URL . 'projects/');
         else {
             if (isset($_POST["submit_add_task"])) {
-                // print_r($_POST);
 
-                $style = 'gtaskblue';
-                $mile = 0;
-                print_r($_POST['responsable']);
-                $rescource = '';
-                /*    for ($i = 0; $i < count($_POST['rescource']); $i++) {
-                        $responsables = '';
+                if($_POST['parent'] == 0 ){
+                    $style = 'gtaskblue';
+                    $mile = 0;
+
+                    $rescource = '';
+                    $responsables = '';
+                    $inGroup = '0';
+
+                    for ($i = 1; $i <= count($_POST['rescource']); $i++) {
+                        $responsables ='';
                         foreach ($_POST['responsable'][$i] as $responsable) {
-                           // echo print_r( $_POST['responsable'][1])." <br/> ";
-                            $responsables .= $responsable[$i] . ' , ';
+                            // echo print_r( $_POST['responsable'][1])." <br/> ";
+                            $responsables .= $responsable . ' . ';
                         }
-                        $rescource .= 'rescource :' . $_POST['rescource'][$i] . ' responsable : ' . $responsables;
+                        $rescource .= "rescource :" . $_POST['rescource'][$i-1] . " responsable : " . $responsables. '<br/>';
                     }
+                    $this->model['Task']->addTask($_POST["name"], $_POST["actual_start"], $_POST["actual_end"], $style, 0 ,$mile, $rescource ,  '0' , $inGroup , '0', '1', $_POST["depend"], '', $_POST["note"], $project_id);
+                }
 
-                   */
-                //echo '<br/>' . $responsables;
+
+
+                echo '<br/>' . $rescource;
                 //   $this->model['Task']->addTask($_POST["name"], $_POST["actual_start"], $_POST["actual_end"], $_POST["style"], $_POST["link"], $_POST["mile"], $_POST["responsable"], $_POST["comp"], $_POST["group"], $_POST["parent"], $_POST["open"], $_POST["depend"], $_POST["caption"], $_POST["note"], $project_id);
             }
         }

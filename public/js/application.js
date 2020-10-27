@@ -70,8 +70,8 @@ $(function () {
         }
         if (html_form_2 == '') {
             html_form_2 = '<div class="form-group">' + $(this).parent().parent().parent().find("#respo > div").html() + '</div>';
+            $(this).parent().parent().parent().find("#respo").append(html_form_2);
         }
-        $(this).parent().parent().parent().find("#respo").append(html_form_2);
     });
 
     // add rescources
