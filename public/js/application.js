@@ -13,16 +13,22 @@ $(function () {
     });
 
     /****************************************/
-    $resource = '';
+
+    var resource = '';
     $(document).ready(function () {
-        $resource = $('#resources_tab').html();
+        resource = $('#resources_tab').html();
     });
 
     // add resources
-    $('#add_resource').on('click', function (e) {
-        $(this).parent().find('#resources_tab').append($resource);
+    $('.add_resource').on('click', function (e) {
+        $(this).parent().find('#resources_tab').append(resource);
     });
 
+    $(document).bind('DOMSubtreeModified', function () {
+        $('.resource_delete').on('click', function () {
+            $(this).parent().parent().remove();
+        })
+    });
 
 });
 
@@ -70,6 +76,7 @@ $(document).ready(function () {
 
         $(this).html($(this).html().includes('EDIT') ? 'CLOSE' : 'EDIT');
 
-    })
+    });
+
 
 });

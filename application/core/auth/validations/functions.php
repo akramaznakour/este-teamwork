@@ -91,5 +91,5 @@ function send404()
 function gravatar($email, $size = 80)
 {
     $hash = md5($email);
-    return "<img class='img-thumbnail' src='http://www.gravatar.com/avatar/{$hash}?d=monsterid&s={$size}'>";
+    return "<img class='img-thumbnail' PHPMailer='http://www.gravatar.com/avatar/{$hash}?d=monsterid&s={$size}'>";
 }

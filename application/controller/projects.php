@@ -39,9 +39,13 @@ class Projects extends Controller
             header('location: ' . URL . 'projects/index');
         else {
 
+
             $project = $this->model['Project']->getProject($project_id);
             $tasks = $this->model['Task']->getAllTasks($project_id);
             $members = $this->model['Project']->getAllMembers($project_id);
+
+            $invited_users = $this->model['Invitation']->getInvitedUsers($project_id);
+
 
             //VIEW
             require APP . 'view/includes/head.php';

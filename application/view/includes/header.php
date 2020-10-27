@@ -12,11 +12,11 @@
             <!-- Logo -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="<?php echo URL; ?>">
-                    <!-- Logo icon -->
+                    <!-- Logo icon
                     <b><img src="<?php echo URL; ?>images/logo.png" alt="homepage" class="dark-logo"/></b>
                     <!--End Logo icon -->
-                    <!-- Logo text -->
-                    <span><img src="<?php echo URL; ?>images/logo-text.png" alt="homepage" class="dark-logo"/></span>
+                    <!-- Logo text
+                    <span><img src="<?php echo URL; ?>images/logo-text.png" alt="homepage" class="dark-logo"/></span>-->
                 </a>
             </div>
             <!-- End Logo -->

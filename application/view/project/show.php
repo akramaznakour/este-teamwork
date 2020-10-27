@@ -34,228 +34,405 @@
 
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs customtab2" role="tablist">
-                            <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#GANNT_GRAPH"
-                                                    role="tab" aria-selected="true"><span class="hidden-sm-up"><i
-                                                class="ti-home"></i></span> <span
-                                            class="hidden-xs-down">GANNT GRAPH</span></a>
+
+                            <?php if ($user->ID == $project->admin_id) { ?>
+
+
+                                <li class="nav-item"><a
+                                            class="nav-link  <?php if ($user->ID == $project->admin_id) { ?> show active <?php } ?> "
+                                            data-toggle="tab" href="#edit_project"
+                                            role="tab"
+                                            aria-selected="false"><span class="hidden-sm-up"><i
+                                                    class="ti-email"></i></span> <span
+                                                class="hidden-xs-down">Edit project</span></a>
+                                </li>
+
+                            <?php } ?>
+
+
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#members_list" role="tab"
+                                                    aria-selected="false"><span class="hidden-sm-up"><i
+                                                class="ti-email"></i></span> <span
+                                            class="hidden-xs-down">Members list</span></a>
                             </li>
+
                             <?php if ($user->ID == $project->admin_id) { ?>
 
                                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#CREATE_A_NEW_TASK"
                                                         role="tab"
                                                         aria-selected="false"><span class="hidden-sm-up"><i
                                                     class="ti-user"></i></span> <span
-                                                class="hidden-xs-down">CREATE A NEW TASK</span></a>
+                                                class="hidden-xs-down">Create a new task</span></a>
                                 </li>
                             <?php } ?>
 
-                            <li class="nav-item"><a class="nav-link primary" data-toggle="tab" href="#TASKS_LIST"
-                                                    role="tab"
-                                                    aria-selected="false"><span class="hidden-sm-up"><i
+                            <li class="nav-item"><a
+                                        class="nav-link primary  <?php if ($user->ID != $project->admin_id) { ?> show active <?php } ?>"
+                                        data-toggle="tab" href="#TASKS_LIST"
+                                        role="tab"
+                                        aria-selected="false"><span class="hidden-sm-up"><i
                                                 class="ti-email"></i></span> <span
                                             class="hidden-xs-down">TASKS LIST</span></a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#MEMBERS_LIST" role="tab"
-                                                    aria-selected="false"><span class="hidden-sm-up"><i
-                                                class="ti-email"></i></span> <span
-                                            class="hidden-xs-down">MEMBERS LIST</span></a>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#GANNT_GRAPH"
+                                                    role="tab" aria-selected="true"><span class="hidden-sm-up"><i
+                                                class="ti-home"></i></span> <span
+                                            class="hidden-xs-down">Gantt graph</span></a>
                             </li>
-                            <?php if ($user->ID == $project->admin_id) { ?>
-
-                                <li class="nav-item"><a class="nav-link"
-                                                        href="<?php echo URL . 'projects/edit/' . $project->id; ?>"
-                                                        role="tab"
-                                                        aria-selected="false"><span class="hidden-sm-up"><i
-                                                    class="ti-email pull-right"></i></span> <span
-                                                class="hidden-xs-down ">EDIT PROJECT</span></a>
-
-                                </li>
-                            <?php } ?>
 
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane active show" id="GANNT_GRAPH" role="tabpanel">
+                            <div class="tab-pane " id="GANNT_GRAPH" role="tabpanel">
                                 <br/>
                                 <div id="embedded-Gantt"></div>
 
                             </div>
 
                             <?php if ($user->ID == $project->admin_id) { ?>
-                                <br/>
+
 
                                 <div class="tab-pane p-20" id="CREATE_A_NEW_TASK" role="tabpanel"><br/>
-                                <div class="assessment-container container">
-                                    <div class="row">
-                                        <div class="col-md-12 form-box">
-                                            <form method="post" class="registration-form"
-                                                  action="<?php echo URL . 'tasks/create/' . $project->id; ?>">
-                                                <fieldset>
-                                                    <div class="form-top">
-                                                        <div class="form-top-left ">
-                                                            <h3> the parameters</h3>
-                                                            <p> description to the parameters</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-bottom">
-
-                                                        <div id="line_form" class="row">
-                                                            <div class="col-lg-6">
-
-                                                                <div class="form-group">
-                                                                    <label class="form-control-label"
-                                                                           for="name">Task
-                                                                        name</label>
-                                                                    <input name="name" class="form-control"
-                                                                           value="task"
-                                                                           type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-
-                                                                <div class="form-group">
-                                                                    <label class="form-control-label"
-                                                                           for="actual_start">Start
-                                                                        date</label>
-                                                                    <input name="actual_start"
-                                                                           class="form-control"
-                                                                           type="date">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-
-                                                                <div class="form-group">
-                                                                    <label class="form-control-label"
-                                                                           for="actual_end">End
-                                                                        date</label>
-                                                                    <input name="actual_end"
-                                                                           class="form-control"
-                                                                           type="date">
-                                                                </div>
-                                                            </div>
-
-
-                                                        </div>
-
-
-                                                        <div class="form-group">
-                                                            <label class="form-control-label">Description </label>
-                                                            <textarea name="note" style="height: 100px"
-                                                                      class=" form-control" rows="8"
-                                                                      cols="50">description..</textarea>
-
-                                                        </div>
-                                                        <button type="button" class="btn btn-next">Next</button>
-                                                    </div>
-                                                </fieldset>
-
-                                                <fieldset>
-                                                    <div class="form-top">
-                                                        <div class="form-top-left">
-                                                            <h3>The resources</h3>
-                                                            <p>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-bottom">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label class="form-control-label"
-                                                                           for="name">lead manager </label>
-                                                                    <select name="responsable_id"
-                                                                            class="form-control">
-                                                                        <?php foreach ($members as $member) { ?>
-                                                                            <option value="<?php echo $member->ID; ?>"><?php echo $member->First_name . ' ' . $member->Last_name ?></option>
-                                                                        <?php } ?>
-                                                                    </select>
-
-                                                                </div>
+                                    <div class="assessment-container container">
+                                        <div class="row">
+                                            <div class="col-md-12 form-box">
+                                                <form method="post" class="registration-form"
+                                                      action="<?php echo URL . 'tasks/create/' . $project->id; ?>">
+                                                    <fieldset>
+                                                        <div class="form-top">
+                                                            <div class="form-top-left ">
+                                                                <h3> the parameters</h3>
+                                                                <p> description to the parameters</p>
                                                             </div>
                                                         </div>
-                                                        <div id="resources_tab" class="row">
+                                                        <div class="form-bottom">
 
+                                                            <div id="line_form" class="row">
+                                                                <div class="col-lg-6">
 
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <label class="form-control-label"
-                                                                           for="name">resource</label>
-                                                                    <input class="form-control"
-                                                                           name="resources[]"
-                                                                           type="text">
+                                                                    <div class="form-group">
+                                                                        <label class="form-control-label"
+                                                                               for="name">Task
+                                                                            name</label>
+                                                                        <input name="name" class="form-control"
+                                                                               type="text" required="">
+                                                                    </div>
                                                                 </div>
+                                                                <div class="col-lg-3">
+
+                                                                    <div class="form-group">
+                                                                        <label class="form-control-label"
+                                                                               for="actual_start">Start
+                                                                            date</label>
+                                                                        <input name="actual_start"
+                                                                               class="form-control" required=""
+                                                                               type="date">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3">
+
+                                                                    <div class="form-group">
+                                                                        <label class="form-control-label"
+                                                                               for="actual_end">End
+                                                                            date</label>
+                                                                        <input name="actual_end" required=""
+                                                                               class="form-control"
+                                                                               type="date">
+                                                                    </div>
+                                                                </div>
+
+
                                                             </div>
 
 
-                                                        </div>
-                                                        <button id="add_resource" type="button"
-                                                                class="btn "><span
-                                                                    class="fa fa-plus-circle">&nbsp;Add resources</span>
-                                                        </button>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">Description </label>
+                                                                <textarea name="note" style="height: 100px"
+                                                                          class=" form-control" rows="8" required=""
+                                                                          cols="50">description..</textarea>
 
-                                                        <br/><br/>
-                                                        <button type="button" class="btn btn-previous">Previous
-                                                        </button>
-                                                        <button type="button" class="btn btn-next">Next</button>
-
-
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <div class="form-top">
-                                                        <div class="form-top-left">
-                                                            <h3> Lorem ipsum dolor sit amet</h3>
-                                                            <p>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-bottom">
-                                                        <div class="row">
-
-                                                            <div class="col-lg-6">
-
-                                                                <div class="form-group">
-                                                                    <label class="form-control-label"
-                                                                           for="parent">parent
-                                                                        task</label>
-                                                                    <select name="parent" class="form-control">
-                                                                        <option value="0">Non</option>
-                                                                        <?php foreach ($tasks as $task) { ?>
-                                                                            <option value="<?php echo $task->id; ?>"><?php echo $task->name ?></option>
-                                                                        <?php } ?>
-                                                                    </select>
-                                                                </div>
                                                             </div>
-                                                            <div class="col-lg-6">
+                                                            <button type="button" class="btn btn-next">Next</button>
+                                                        </div>
+                                                    </fieldset>
 
-                                                                <div class="form-group">
-                                                                    <label class="form-control-label"
-                                                                           for="depend">depend</label>
-                                                                    <select name="depend" class="form-control">
-                                                                        <option value="0">Non</option>
-                                                                        <?php foreach ($tasks as $task) { ?>
-                                                                            <option value="<?php echo $task->id; ?>"><?php echo $task->name ?></option>
-                                                                        <?php } ?>
-                                                                    </select>
-                                                                </div>
+                                                    <fieldset>
+                                                        <div class="form-top">
+                                                            <div class="form-top-left">
+                                                                <h3>The resources</h3>
                                                             </div>
                                                         </div>
+                                                        <div class="form-bottom">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label class="form-control-label"
+                                                                               for="name">lead manager </label>
+                                                                        <select name="responsable_id"
+                                                                                class="form-control">
+                                                                            <?php foreach ($members as $member) { ?>
+                                                                                <option value="<?php echo $member->ID; ?>"><?php echo $member->First_name . ' ' . $member->Last_name ?></option>
+                                                                            <?php } ?>
+                                                                        </select>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="resources_tab" class="row">
 
 
-                                                        <button type="button" class="btn btn-previous">Previous
-                                                        </button>
-                                                        <button type="submit" name="submit_add_task"
-                                                                class="btn">
-                                                            Submit
-                                                        </button>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="form-control-label"
+                                                                               for="name">resource</label>
+                                                                        <input class="form-control"
+                                                                               name="resources[]" required=""
+                                                                               type="text"
+                                                                               style="display: inline-block;width: 80%">
+                                                                        <div
+                                                                                class=" pull-right btn resource_delete"><span
+                                                                                    class="fa fa-window-close-o"></span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                            </div>
+                                                            <button type="button"
+                                                                    class="btn add_resource"><span
+                                                                        class="fa fa-plus-circle">&nbsp;Add resources</span>
+                                                            </button>
+
+                                                            <br/><br/>
+                                                            <button type="button" class="btn btn-previous">Previous
+                                                            </button>
+                                                            <button type="button" class="btn btn-next">Next</button>
+
+
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="form-top">
+                                                            <div class="form-top-left">
+                                                                <h3> Lorem ipsum dolor sit amet</h3>
+                                                                <p>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-bottom">
+                                                            <div class="row">
+
+                                                                <div class="col-lg-6">
+
+                                                                    <div class="form-group">
+                                                                        <label class="form-control-label"
+                                                                               for="parent">parent
+                                                                            task</label>
+                                                                        <select name="parent" class="form-control">
+                                                                            <option value="0">Non</option>
+                                                                            <?php foreach ($tasks as $task) { ?>
+                                                                                <option value="<?php echo $task->id; ?>"><?php echo $task->name ?></option>
+                                                                            <?php } ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+
+                                                                    <div class="form-group">
+                                                                        <label class="form-control-label"
+                                                                               for="depend">depend</label>
+                                                                        <select name="depend" class="form-control">
+                                                                            <option value="0">Non</option>
+                                                                            <?php foreach ($tasks as $task) { ?>
+                                                                                <option value="<?php echo $task->id; ?>"><?php echo $task->name ?></option>
+                                                                            <?php } ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <button type="button" class="btn btn-previous">Previous
+                                                            </button>
+                                                            <button type="submit" name="submit_add_task"
+                                                                    class="btn">
+                                                                Submit
+                                                            </button>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div></div><?php } ?>
+                                </div>
 
-                            <div class="tab-pane p-20 small" id="TASKS_LIST" role="tabpanel">
+                                <div class="tab-pane p-20  <?php if ($user->ID == $project->admin_id) { ?> show active <?php } ?>"
+                                     id="edit_project" role="tabpanel"><br/>
+                                    <div class="assessment-container container">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="card-title">
+                                                    <h4>Update a project</h4>
+
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="basic-elements">
+                                                        <form method="post"
+                                                              action="<?php echo URL . 'projects/update/' . $project->id ?>">
+
+
+                                                            <div class="form-group">
+                                                                <label class="form-control-label"
+                                                                       for="name">project name</label>
+                                                                <input name="title" type="text"
+                                                                       value="<?php echo $project->title; ?>"
+                                                                       required
+                                                                       class="form-control">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label"
+                                                                       for="respo">administrator</label>
+                                                                <select name="admin_id"
+                                                                        class="form-control">
+                                                                    <?php foreach ($members as $member) { ?>
+                                                                        <option value="<?php echo $member->ID ?>"><?php echo $member->First_name . ' ' . $member->Last_name ?></option>
+                                                                    <?php } ?>
+
+                                                                </select>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+
+                                                                    <div class="form-group">
+                                                                        <label class="form-control-label"
+                                                                               for="comp">Start date</label>
+                                                                        <input name="start_date"
+                                                                               value="<?php echo $project->start_date; ?>"
+                                                                               type="date" required=""
+                                                                               class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+
+                                                                    <div class="form-group">
+                                                                        <label class="form-control-label"
+                                                                               for="name">End date</label>
+                                                                        <input name="end_date" type="date"
+                                                                               value="<?php echo $project->end_date; ?>"
+                                                                               required
+                                                                               class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">description </label>
+                                                                <textarea name="description"
+                                                                          style="height: 136px" required
+                                                                          for="description"
+                                                                          class=" form-control" rows="8"
+                                                                          cols="50"><?php echo $project->description; ?></textarea>
+
+                                                            </div>
+                                                            <div class="form-group text-center">
+                                                                <button type="submit"
+                                                                        name="submit_update_project"
+                                                                        class="btn btn-primary pull-right">
+                                                                    Update
+                                                                </button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+
+                                                <div class="card-title">
+                                                    <h4>Add members</h4>
+
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="basic-elements p-10 ">
+                                                        <div class="card-body">
+                                                            <div class="basic-elements">
+                                                                <div class="input-group input-group-default">
+                                            <span class="input-group-btn">
+                                                <button id="javascript-ajax-button" class="btn btn-primary"
+                                                        type="submit">
+                                                    <i class="ti-search"></i>
+                                                </button>
+                                            </span>
+                                                                    <input id="recherche"
+                                                                           placeholder=" E-mail "
+                                                                           class="form-control" type="text">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="basic-elements">
+
+                                                        <form method="post"
+                                                              action="<?php echo URL . 'Invitations/invite/' . $project->id ?>">
+
+                                                            <div class="">
+
+                                                                <div class="form-group">
+                                                                    <select id="javascript-ajax-result-box"
+                                                                            name="user_invited_id"
+                                                                            multiple="1"
+                                                                            style="height: 200px"
+                                                                            class="form-control">
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group pull-right">
+                                                                    <button type="submit"
+                                                                            name="submit_invite_member"
+                                                                            class="btn btn-primary pull">
+                                                                        <span class="pull-right">Add</span>
+                                                                    </button>
+                                                                </div>
+
+
+                                                                <div class="form-group">
+
+                                                                    You have already added :
+
+                                                                    <ul>
+                                                                        <?php foreach ($invited_users as $invited_user) {
+                                                                            echo "<li class='class=\"center\"'>" . $invited_user->First_name . ' ' . $invited_user->Last_name . "</li>";
+                                                                        } ?>
+                                                                    </ul>
+
+                                                                </div>
+
+
+                                                            </div>
+
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="card-title">
+                                                    <h4>Members list : </h4>
+                                                    <ul>
+                                                        <?php foreach ($members as $member) { ?>
+                                                            <li value="<?php echo $member->ID ?>"><?php echo $member->First_name . '  ' . $member->Last_name ?></li>
+                                                        <?php } ?>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <?php } ?>
+
+                            <div class="tab-pane p-20   <?php if ($user->ID != $project->admin_id) { ?> show active <?php } ?>"
+                                 id="TASKS_LIST" role="tabpanel">
                                 <br/>
 
                                 <div class="table-responsive table-striped ">
@@ -281,7 +458,7 @@
                                         <?php foreach ($tasks
 
                                                        as $task) { ?>
-                                            <tr class="small">
+                                            <tr style="font-size: 15px">
                                                 <td><?php echo $task->name; ?></td>
 
                                                 <td><?php echo $task->actual_start; ?></td>
@@ -307,10 +484,6 @@
                                                                    class="form-control input-sm" type="number"
                                                                    value="<?php echo $task->comp ?>"> &nbsp; %
                                                             &nbsp;
-                                                            <button class="btn btn-sm btn-primary small"
-                                                                    name="submit_update_task"
-                                                                    type="submit">UPDATE
-                                                            </button>
                                                             <button class="btn btn-sm btn-success small"
                                                                     name="submit_finished_task"
                                                                     type="submit">FINISHE
@@ -325,7 +498,11 @@
                                                     <?php } ?>
 
                                                 </td>
-                                                <td><?php echo $task->resources; ?></td>
+                                                <td>
+                                                    <?php foreach ($this->model['Task']->getTaskResources($task->id) as $resource) {
+                                                        echo $resource->name . ' <br/>';
+                                                    } ?>
+                                                </td>
                                                 <?php if ($user->ID == $project->admin_id) { ?>
 
                                                     <td>
@@ -346,7 +523,6 @@
                                                             <div class="form-top">
                                                                 <div class="form-top-left ">
                                                                     <h3> the parameters</h3>
-                                                                    <p> description to the parameters</p>
                                                                 </div>
                                                             </div>
                                                             <div class="form-bottom">
@@ -439,27 +615,33 @@
                                                                 </div>
                                                                 <div id="resources_tab" class="row">
 
-                                                                    <?php foreach (explode('    ', $task->resources) as $resource) { ?>
+                                                                    <?php foreach ($this->model['Task']->getTaskResources($task->id) as $resource) { ?>
                                                                         <div class="col-md-3">
-                                                                            <div class="form-group">
+                                                                            <div class="form-group d-xl-inline">
                                                                                 <label class="form-control-label"
                                                                                        for="name">resource</label>
-                                                                                <input class="form-control"
+                                                                                <input class="form-control "
+                                                                                       style="display: inline-block;width: 80%"
                                                                                        name="resources[]"
-                                                                                       value="<?php echo $resource ?>"
+                                                                                       value="<?php echo $resource->name ?>"
                                                                                        type="text">
+                                                                                <div
+                                                                                        class=" pull-right btn resource_delete"><span
+                                                                                            class="fa fa-window-close-o"></span>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
 
                                                                     <?php } ?>
 
                                                                 </div>
-                                                                <button id="add_resource" type="button"
-                                                                        class="btn btn-primary"><span
+
+                                                                <br/> 
+                                                                <button
+                                                                        class="btn btn-primary add_resource"><span
                                                                             class="fa fa-plus-circle pull-right">&nbsp;Add resources</span>
                                                                 </button>
 
-                                                                <br/><br/>
                                                                 <button type="button"
                                                                         class="btn btn-previous  btn-danger ">Previous
                                                                 </button>
@@ -540,7 +722,7 @@
                                 </div>
 
                             </div>
-                            <div class="tab-pane p-20" id="MEMBERS_LIST" role="tabpanel">
+                            <div class="tab-pane p-20 " id="members_list" role="tabpanel">
                                 <br/>
                                 <ul>
                                     <?php foreach ($members as $member) { ?>

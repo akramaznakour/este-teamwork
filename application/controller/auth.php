@@ -1,13 +1,5 @@
 <?php
 
-/**
- * Class Home
- *
- * Please note:
- * Don't use the same name for class and method, as this might trigger an (unintended) __construct of the class.
- * This is really weird behaviour, but documented here: http://php.net/manual/en/language.oop5.decon.php
- *
- */
 
 use ptejada\uFlex\User;
 
@@ -55,7 +47,7 @@ class Auth extends Controller
     public function logout()
     {
         $user = new User();
-        include APP . 'core/auth/validations/guest_validation.php';
+        include APP . 'core/auth/validations/auth_validation.php';
         $user->logout();
         header('location: ' . URL . 'home');
     }
@@ -72,16 +64,47 @@ class Auth extends Controller
 
     public function store()
     {
+
         $user = new User();
+
         include APP . 'core/auth/validations/guest_validation.php';
         include APP . 'core/auth/validations/validations.php';
+
+
+        require APP . 'core/Mail/Mail.php';
 
         if (count($_POST)) {
 
             $input = new \ptejada\uFlex\Collection($_POST);
             $input->filter('Username', 'first_name', 'last_name', 'Email', 'Password', 'Password2', 'Avatar');
 
-            $user->register($input);
+            $confirmation = $user->register($input, true);
+
+            $to = $_POST['Email'];
+            $subject = "Hi!";
+            $body = "<HTML>";
+            $body .= "cliquer ";
+            $body .= "<a href=" . URL . "auth/verification/" . $user->ID . "/" . $confirmation . ">ici</a> ";
+            $body .= "pour activer votre compte";
+            $body .= "</HTML>";
+
+            $headers = array('From' => EMAIL_USER, 'To' => $to, 'Subject' => $subject, 'MIME-Version' => '1.0rn',
+                'Content-Type' => "text/html; charset=UTF-8\r\n");
+
+            $smtp = Mail::factory('smtp',
+                array('host' => EMAIL_HOST,
+                    'port' => EMAIL_PORT,
+                    'auth' => true,
+                    'username' => EMAIL_USER,
+                    'password' => EMAIL_PASSWORD,
+                    'Subject' => $subject,));
+            $mail = $smtp->send($to, $headers, $body);
+
+            if (PEAR::isError($mail)) {
+                echo("<p> </p>");
+            } else {
+                echo("<p>Message successfully sent!</p>");
+            }
 
             echo json_encode(
                 array(
@@ -92,6 +115,20 @@ class Auth extends Controller
             );
         }
         header('location: ' . URL . 'auth');
+    }
+
+    public function verification($user_id, $confirmation)
+    {
+        $user = new User();
+        require APP . 'core/auth/validations/guest_validation.php';
+
+        if ($this->model['User']->getUser($user_id)->Confirmation == $confirmation && $this->model['User']->getUser($user_id)->Activated == 0) {
+            $this->model['User']->activateUser($user_id);
+        } else {
+            header('location: ' . URL);
+        }
+
+
     }
 
     public function edit()

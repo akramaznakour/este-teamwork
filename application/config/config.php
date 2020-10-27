@@ -25,3 +25,9 @@ define('DB_NAME', 'site');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_CHARSET', 'utf8');
+
+
+define('EMAIL_HOST', 'ssl://smtp.gmail.com:465');
+define('EMAIL_PORT', '465');
+define('EMAIL_USER', 'akram.ruoka@gmail.com');
+define('EMAIL_PASSWORD', 'PewPewdiepie108/*');

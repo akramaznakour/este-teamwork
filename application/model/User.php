@@ -48,4 +48,12 @@ class User
         return $query->fetch();
     }
 
+    public function activateUser($user_id)
+    {
+        $sql = "UPDATE users SET Activated =1 WHERE id = :user_id";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':user_id' => $user_id);
+        $query->execute($parameters);
+    }
+
 }

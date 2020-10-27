@@ -25,7 +25,6 @@ class Tasks extends Controller
         $project = $this->model['Project']->getProject($project_id);
 
         $members = $this->model['Project']->getAllMembers($project_id);
-
         if ($project->admin_id != $user->ID)
             header('location: ' . URL . 'projects/');
         else {
@@ -34,26 +33,19 @@ class Tasks extends Controller
 
                 $style = 'gtaskblue';
                 $mile = 0;
-                $resources = '';
                 $isGroup = '0';
 
-                foreach ($_POST['resources'] as $resource) {
-                    $resources .= $resource . '  ';
-                }
-
                 if ($_POST['parent'] != 0) {
-
                     $parentTask = $this->model['Task']->getTask($_POST['parent']);
                     if ($parentTask->group == 0) {
                         $this->model['Task']->turnIntoGroup($parentTask->id);
                     }
                 }
 
-                $this->model['Task']->addTask($_POST["name"], $_POST["actual_start"], $_POST["actual_end"], $style, 0, $mile, $resources, $_POST['responsable_id'], '0', $isGroup, $_POST['parent'], '1', $_POST["depend"], '', $_POST["note"], $project_id);
-
+                $this->model['Task']->addTask($_POST["name"], $_POST["actual_start"], $_POST["actual_end"], $style, 0, $mile, $_POST['resources'], $_POST['responsable_id'], '0', $isGroup, $_POST['parent'], '1', $_POST["depend"], '', $_POST["note"], $project_id);
             }
         }
-        header('location: ' . URL . 'projects/show/' . $project_id);
+         header('location: ' . URL . 'projects/show/' . $project_id);
     }
 
     public function update($task_id = 1)
@@ -73,12 +65,7 @@ class Tasks extends Controller
 
                 $style = 'gtaskblue';
                 $mile = 0;
-                $resources = '';
                 $isGroup = '0';
-
-                foreach ($_POST['resources'] as $resource) {
-                    $resources .= $resource . '   ';
-                }
 
                 if ($_POST['parent'] != 0) {
 
@@ -88,11 +75,11 @@ class Tasks extends Controller
                     }
                 }
 
-                $this->model['Task']->updateTask($_POST["name"], $_POST["actual_start"], $_POST["actual_end"], $style, 0, $mile, $resources, $_POST['responsable_id'], '0', $isGroup, $_POST['parent'], '1', $_POST["depend"], '', $_POST["note"], $task->project_id, $task->id);
+                $this->model['Task']->updateTask($_POST["name"], $_POST["actual_start"], $_POST["actual_end"], $style, 0, $mile, $_POST['resources'], $_POST['responsable_id'], '0', $isGroup, $_POST['parent'], '1', $_POST["depend"], '', $_POST["note"], $task->project_id, $task->id);
 
             }
         }
-        //     header('location: ' . URL . 'projects/show/' . $task->project_id);
+            header('location: ' . URL . 'projects/show/' . $task->project_id);
     }
 
 

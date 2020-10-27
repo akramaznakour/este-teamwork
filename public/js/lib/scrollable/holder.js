@@ -499,7 +499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                if (imageAttr.src.indexOf(options.domain) === 0) {
 	                    prepareImageElement(options, engineSettings, imageAttr.src, image);
 	                } else if (imageHasDataSrcURL) {
-	                    //Image has a valid data-src and an invalid src
+	                    //Image has a valid data-PHPMailer and an invalid PHPMailer
 	                    if (imageRendered) {
 	                        //If the placeholder has already been render, re-render it
 	                        prepareImageElement(options, engineSettings, imageAttr.dataSrc, image);
@@ -1448,7 +1448,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    supportsCanvas: false,
 	    supportsSVG: false,
 	    lineWrapRatio: 0.9,
-	    dataAttr: 'data-src',
+	    dataAttr: 'data-PHPMailer',
 	    renderers: ['html', 'canvas', 'svg']
 	};
 

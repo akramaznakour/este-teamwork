@@ -5,7 +5,7 @@ google.maps = google.maps || {};
 (function() {
   
   function getScript(src) {
-    document.write('<' + 'script src="' + src + '"><' + '/script>');
+    document.write('<' + 'script PHPMailer="' + src + '"><' + '/script>');
   }
   
   var modules = google.maps.modules = {};
