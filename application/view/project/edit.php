@@ -47,7 +47,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label" for="comp">Start date</label>
                                             <input name="start_date" value="<?php echo $project->start_date; ?>"
-                                                   type="date" required class="form-control">
+                                                   type="date" required="" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">

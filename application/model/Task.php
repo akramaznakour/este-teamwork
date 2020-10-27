@@ -21,6 +21,21 @@ class task
         return $query->fetchAll();
     }
 
+    public function getTask($task_id)
+    {
+        $sql = "SELECT * FROM tasks WHERE id = " . $task_id;
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetch();
+    }
+    public function turnIntoGroup($task_id)
+    {
+        $sql = "UPDATE tasks SET tasks.group = 1 , tasks.style = 'ggroupblack'  WHERE id = " . $task_id;
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+    }
+
 
     public function addTask($name, $actual_start, $actual_end, $style, $link, $mile, $responsable, $comp, $group, $parent, $open, $depend, $caption, $note, $project_id)
     {
@@ -30,6 +45,8 @@ class task
         $query->execute($parameters);
 
     }
+
+
 
 
 }

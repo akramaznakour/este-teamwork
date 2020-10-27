@@ -57,7 +57,7 @@ class Project
 
     public function getProject($project_id)
     {
-        $sql = "SELECT * FROM projects WHERE id = :project_id LIMIT 1 ";
+        $sql = "SELECT * FROM projects WHERE id = :project_id  ";
         $query = $this->db->prepare($sql);
         $parameters = array(':project_id' => $project_id);
 

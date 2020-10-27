@@ -23,7 +23,7 @@ class Controller
     }
 
     /**
-     * Open the database connection with the credentials from application/config/auth.php
+     * Open the database connection with the credentials from application/config/
      */
     private function openDatabaseConnection()
     {

@@ -29,10 +29,11 @@ class Projects extends Controller
         header('location: ' . URL . 'projects/');
     }
 
-    public function show($project_id = 1)
+    public function show($project_id)
     {
         $user = new  User();
         include APP . 'core/auth/validations/auth_validation.php';
+
 
         if (!$this->model['Project']->isMember($user->ID, $project_id))
             header('location: ' . URL . 'projects/index');
@@ -48,7 +49,9 @@ class Projects extends Controller
             require APP . 'view/includes/sidebar.php';
             require APP . 'view/project/show.php';
             require APP . 'view/includes/footer.php';
+            require APP . 'view/project/chat.php';
             require APP . 'view/includes/script.php';
+
         }
     }
 
@@ -84,7 +87,7 @@ class Projects extends Controller
         else {
 
             if (isset($_POST["submit_update_project"])) {
-                $this->model['Project']->updateProject($_POST['title'], $_POST['description'], $_POST['admin_id'], $_POST['start_date'], $_POST['end_date'],$project_id);
+                $this->model['Project']->updateProject($_POST['title'], $_POST['description'], $_POST['admin_id'], $_POST['start_date'], $_POST['end_date'], $project_id);
             }
             header('location: ' . URL . 'projects/edit/' . $project_id);
         }

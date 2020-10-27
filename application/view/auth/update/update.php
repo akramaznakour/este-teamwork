@@ -15,7 +15,6 @@
     <!-- Container fluid  -->
     <div class="container-fluid">
 
-        <!-- /# row -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -25,7 +24,8 @@
                     </div>
                     <div class="card-body">
                         <div class="basic-elements">
-                            <form method="post" action="<?php echo URL . 'auth/update' ?>">
+                            <form method="post" action="<?php echo URL . 'auth/update' ?>"
+                                  enctype="multipart/form-data" autocomplete="off">
 
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -54,10 +54,17 @@
                                             <input name="Email" type="text" required value="<?php echo $user->Email ?>"
                                                    class="form-control">
                                         </div>
-                                        <div class="form-group">
+
+                                        <div class=" form-control-file">
                                             <label>Avatar </label>
-                                            <input name="Avatar" type="text" required value="<?php echo $user->Avatar ?>"
-                                                   class="form-control">
+
+                                            <label class="custom-file pull-right"
+                                                   style="width: 100px;height: 100px;position: relative">
+                                                <img src="<?php echo URL . 'uploads/' . $user->Avatar; ?>"
+                                                     alt="user" class="profile-pic"/>
+
+                                                <input type="file" id="file" name="Avatar" class="custom-file-input">
+                                            </label>
                                         </div>
 
 
@@ -65,15 +72,13 @@
 
                                 </div>
                                 <div class="form-group text-center">
-                                    <a class="btn btn-primary pull-left" href="<? echo URL . 'auth/edit_password' ?>">update
-                                        password</a>
+
                                     <button type="submit" class="btn btn-primary pull-right">Update</button>
                                     <br>
 
                                 </div>
                                 <br/><BR>&nbsp;
                             </form>
-                            <a href="<? echo URL ?>" class="pull-left">Back to my account</a>
 
                         </div>
                     </div>
@@ -82,7 +87,22 @@
 
         </div>
         <!-- /# row -->
+        <!-- /# row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-title">
 
+
+                    </div>
+                    <div class="card-body">
+                        <a class="btn btn-primary pull-left" href="<? echo URL . 'auth/edit_password' ?>">update
+                            password</a>
+                        <a href="<? echo URL ?>" class="pull-right">Back to my account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- End PAge Content -->
     </div>
     <!-- End Container fluid  -->

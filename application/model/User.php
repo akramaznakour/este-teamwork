@@ -19,7 +19,18 @@ class User
      */
     public function getAllusers($q)
     {
-        $sql = "SELECT ID,First_name,Last_name,Avatar,Email FROM users where email like '%".$q."%' ";
+        $sql = "SELECT ID,First_name,Last_name,Avatar,Email FROM users where email like '%" . $q . "%' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+
+        return $query->fetchAll();
+    }
+
+
+    public function getUninvitedUsers($project_id, $q)
+    {
+        $sql = "SELECT ID,First_name,Last_name,Avatar,Email FROM users where email like '%" . $q . "%' and  ID not in (SELECT user_invited_id from invitations where project_id = " . $project_id . " ) and ID not in (SELECT user_id from project_users where project_id = " . $project_id . ")";
         $query = $this->db->prepare($sql);
         $query->execute();
 
