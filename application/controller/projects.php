@@ -61,7 +61,7 @@ class Projects extends Controller
             $project = $this->model['Project']->getProject($project_id);
             $tasks = $this->model['Task']->getAllTasks($project_id);
             $members = $this->model['Project']->getAllMembers($project_id);
-            $invited_members = $this->model['Membership']->getInvitedMembers($project_id);
+            $invited_members = $this->model['Membership']->getInvitedUsers($project_id);
 
             $invited_users = array();
             if ($project->admin_id == $user->ID)
@@ -90,6 +90,12 @@ class Projects extends Controller
             if (isset($_POST["submit_update_project"])) {
                 $this->model['Project']->updateProject($_POST['title'], $_POST['description'], $_POST['admin_id'], $_POST['start_date'], $_POST['end_date'], $project_id);
             }
+
+            $notificationContent = $user->getProperty('last_name').' '.$user->getProperty('first_name').' have edited the project : '.$project->title;
+            foreach ($this->model['Project']->getAllMembers($project->id) as $member) {
+                $this->model['Notification']->addNotification($member->ID,$notificationContent);
+            }
+
             header('location: ' . URL . 'projects/show/' . $project_id . '/true');
         }
     }

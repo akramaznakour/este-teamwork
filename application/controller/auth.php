@@ -2,6 +2,7 @@
 
 
 use ptejada\uFlex\User;
+use ptejada\uFlex\Hash;
 
 /**
  * Class Auth
@@ -48,7 +49,7 @@ class Auth extends Controller
                 'form' => $user->log->getFormErrors(),
             ));
         }
-        header('location: ' . URL . 'home');
+        header('location: ' . URL);
     }
 
     /**
@@ -90,10 +91,10 @@ class Auth extends Controller
         if (count($_POST)) {
 
             $input = new \ptejada\uFlex\Collection($_POST);
-            $input->filter('Username', 'first_name', 'last_name', 'Email', 'Password', 'Password2', 'Avatar');
+            $input->filter('first_name', 'last_name', 'Email', 'Password', 'Password2', 'Avatar');
 
             $confirmation = $user->register($input, true);
-
+            
             $to = $_POST['Email'];
             $subject = "Hi!";
             $body = "<HTML>";
@@ -119,7 +120,7 @@ class Auth extends Controller
             } else {
                 echo("<p>Message successfully sent!</p>");
             }
-
+            
             echo json_encode(
                 array(
                     'error' => $user->log->getErrors(),
@@ -140,12 +141,18 @@ class Auth extends Controller
         $user = new User();
         require APP . 'core/auth/validations/guest_validation.php';
 
-        if ($this->model['User']->getUser($user_id)->Confirmation == $confirmation && $this->model['User']->getUser($user_id)->Activated == 0) {
-            $this->model['User']->activateUser($user_id);
-        } else {
-            header('location: ' . URL);
-        }
+        $today = date("Y-m-d");
 
+        $RegDate = $this->model['User']->getUser($user_id)->RegDate;
+   
+        if ((time() - strtotime(date('d-m-Y',$RegDate)))/(3600*24) < 15) {
+    
+            if ($this->model['User']->getUser($user_id)->Confirmation == $confirmation && $this->model['User']->getUser($user_id)->Activated == 0) 
+            $this->model['User']->activateUser($user_id);
+                        header('location: ' . URL);
+        } else {
+            $this->model['User']->deleteUser($user_id);
+        }
 
     }
 
@@ -294,6 +301,8 @@ class Auth extends Controller
         $user = new User();
         include APP . 'core/auth/validations/auth_validation.php';
         //VIEW
+
+
         require APP . 'view/includes/head.php';
         require APP . 'view/includes/header.php';
         require APP . 'view/includes/sidebar.php';
@@ -308,17 +317,20 @@ class Auth extends Controller
     public function update_password()
     {
         $user = new User();
+        include APP . 'core/auth/validations/auth_validation.php';
+
+        $user_data = $user->toArray();
+        $hash = new Hash();
 
         if (count($_POST)) {
             $input = new \ptejada\uFlex\Collection($_POST);
-            $hash = $input->c;
 
-            if ($hash) {
-                $user->newPassword($hash, array('Password' => $input->Password, 'Password2' => $input->Password2,));
-                $redirectPage = "login";
+            if ($user_data['Password'] == $hash->generateUserPassword($user, $input->oldPassword)) {
+                $user->update(array('Password' => $input->newPassword, 'Password2' => $input->newPassword2,));
+                header('location: ' . URL . 'auth/logout');
+
             } else {
-                $user->update(array('Password' => $input->Password, 'Password2' => $input->Password2,));
-                $redirectPage = 'account';
+                header('location: ' . URL . 'auth/update_password');
             }
 
             echo json_encode(
@@ -328,7 +340,6 @@ class Auth extends Controller
                     'form' => $user->log->getFormErrors(),
                 )
             );
-            //   header('location: ' . URL . 'auth/logout');
 
         }
     }

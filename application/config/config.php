@@ -1,12 +1,6 @@
-<?php
 
-define('ENVIRONMENT', 'development');
 
-if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
-    error_reporting(E_ALL);
-    ini_set("display_errors", 1);
-}
-
+<?php 
 
 define('URL_PUBLIC_FOLDER', 'public');
 define('URL_PROTOCOL', '//');
@@ -21,7 +15,7 @@ define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER);
 
 define('DB_TYPE', 'mysql');
 define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'site');
+define('DB_NAME', 'teamwork');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_CHARSET', 'utf8');
@@ -29,5 +23,5 @@ define('DB_CHARSET', 'utf8');
 
 define('EMAIL_HOST', 'ssl://smtp.gmail.com:465');
 define('EMAIL_PORT', '465');
-define('EMAIL_USER', 'akram.ruoka@gmail.com');
-define('EMAIL_PASSWORD', 'PewPewdiepie108/*');
+define('EMAIL_USER', 'teamwork.este@gmail.com');
+define('EMAIL_PASSWORD', 'teamworkteamwork');

@@ -15,8 +15,10 @@
         <?php
         foreach ($tasks as $task) {
             $responsable = "undetermend";
-            if ($task->responsable_id != 0)
-                $responsable = $this->model['User']->getUser($task->responsable_id)->first_name . ' ' . $this->model['User']->getUser($task->responsable_id)->last_name;
+            $responsable = "";
+            foreach ($this->model['Task']->getTaskResponsables($task->id) as $respo) {
+                $responsable .= '  . '.$this->model['User']->getUser($respo->responsable_id)->last_name . ' ' . $this->model['User']->getUser($respo->responsable_id)->first_name;
+            }
             echo "g.AddTaskItem(new JSGantt.TaskItem(" . $task->id . ", '" . $task->name . "' , '" . $task->start_date . "', '" . $task->end_date . "', '" . $task->style . "', '" . $task->link . "', " . $task->mile . ", '" . $responsable . "','" . $task->progress . "', " . $task->isGroup . "," . $task->parent . ", " . $task->open . ", '" . $task->depend . "',  '" . $task->caption . "'    ,  '" . $task->note . "', g));  ";
         }
         ?>

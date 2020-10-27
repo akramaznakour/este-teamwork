@@ -38,8 +38,7 @@ class Memberships extends Controller
         $project = $this->model['Project']->getProject($invitation->project_id);
 
         if ($invitation->user_invited_id != $user->ID)
-            //  header('location: ' . URL . 'projects/index');
-            echo 'her';
+               header('location: ' . URL . 'projects/index');
         else {
 
             if (isset($_POST["submit_accept_invitation"])) {
@@ -87,7 +86,7 @@ class Memberships extends Controller
         else {
             if ($this->model['Project']->isMember($_POST['member_to_remove'], $project_id))
                 $this->model['Membership']->removeMember($_POST['member_to_remove'], $project_id);
-            header('location: ' . URL . 'projects/show/' . $project_id . '/true');
+         //   header('location: ' . URL . 'projects/show/' . $project_id . '/true');
         }
     }
 

@@ -1,70 +1,68 @@
+<!-- begin #content -->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb pull-right">
+        <li><a href="<?php echo URL; ?>">Home</a></li>
+        <li class="active">Edit password</li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <h1 class="page-header"> Edit password </h1>
+    <!-- end page-header -->
 
+    <!-- begin row -->
+    <div class="row">
+        <!-- begin col-6 -->
+        <div class="col-md-12">
 
-<!-- Page wrapper  -->
-<div class="page-wrapper">
-    <!-- Bread crumb -->
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h3 class="text-primary">Dashboard</h3> </div>
-        <div class="col-md-7 align-self-center">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-        </div>
-    </div>
-    <!-- End Bread crumb -->
-    <!-- Container fluid  -->
-    <div class="container-fluid">
-
-        <!-- /# row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-title">
-                        <h4>Update Account</h4>
-
+            <!-- begin panel -->
+            <div class="panel  panel-success " data-sortable-id="form-plugins-4">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                     </div>
-                    <div class="card-body">
-                        <div class="basic-elements">
-                            <form method="post" action="<?php echo URL . 'auth/update_password' ?>"  >
-
-                                <div class="row">
-                                    <div class="col-lg-6">
-
-                                        <div class="form-group">
-                                            <label>New Password</label>
-                                            <input name="Password" type="password" class="form-control" required autofocus>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Confirm New Password</label>
-                                            <input name="Password2" type="password" class="form-control" required>
-                                        </div>
-                                        <input name="c" type="hidden" value="<?php echo getVar("c")?>">
-
-                                        <button type="submit" class="btn btn-primary pull-right">Update</button>
-
-                                    </div>
+                    <h4 class="panel-title">password panel</h4>
+                </div>
+                <div class="panel-body panel-form">
+                    <form class="form-horizontal form-bordered" method="post" action="<?php echo URL . 'auth/update_password' ?>"
+                          enctype="multipart/form-data" autocomplete="off">
 
 
-                                </div>
-                                <div class="form-group text-center">
-
-
-                                </div>
-                                <a href="<? echo URL?>" class="pull-left">Back to my account</a>
-                                &nbsp;
-                            </form>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Your password</label>
+                            <div class="col-md-8">
+                                <input name="oldPassword" type="password" required  class="form-control"   />
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">new password</label>
+                            <div class="col-md-8">
+                                <input name="newPassword" type="password" required  class="form-control"   />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Confirm  the new password</label>
+                            <div class="col-md-8">
+                                <input name="newPassword2" type="password" required  class="form-control"   />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"></label>
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-sm btn-success">Update</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-
+<a href="<?php echo URL.'auth/edit'?>" class="btn btn-success ">Edit account infos</a>
+            <!-- end panel -->
         </div>
-        <!-- /# row -->
+        <!-- end col-6 -->
 
-        <!-- End PAge Content -->
     </div>
-    <!-- End Container fluid  -->
-
+    <!-- end row -->
+</div>
+<!-- end #content -->

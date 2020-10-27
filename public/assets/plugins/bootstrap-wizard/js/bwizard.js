@@ -229,11 +229,8 @@ $.widget("bootstrap.bwizard", {
 			this.buttons.addClass('bwizard-buttons');
 			if(backBtnText != ''){
 				this.backBtn =
-					$("<li class='previous'><a href='#'>" +
-						backBtnText + "</a></li>")
-					.appendTo(this.buttons).bind({
-						'click': function () {
-							self.back();
+					$("<li class='previous'><a href='#' class='btn btn-warning'>" + backBtnText + "</a></li>").appendTo(this.buttons).bind({'click': function () {
+					    self.back();
 							return false;
 						}
 					}).attr("role", "button");
@@ -241,7 +238,7 @@ $.widget("bootstrap.bwizard", {
 			}
 			if(nextBtnText != ''){
 				this.nextBtn =
-					$("<li class='next'><a href='#'>" +
+					$("<li class='next'><a href='#' class='btn btn-success'>" +
 						nextBtnText + "</a>")
 					.appendTo(this.buttons).bind({
 						'click': function () {

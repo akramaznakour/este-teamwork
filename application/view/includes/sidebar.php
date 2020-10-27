@@ -48,10 +48,16 @@
                     <span class="badge pull-right"><?php echo count($uncompletedProjectsMemberOf); ?></span>
                     <span>Member of</span>
                 </a>
-                <ul class="sub-menu p-0">
+                <ul class="sub-menu  p-0">
+                                        <li class="p-l-30 p-5">
+
                     <?php foreach ($uncompletedProjectsMemberOf as $proj) { ?>
-                        <li class="p-l-30 p-5" <?php if( $proj->actual_end =="" && $proj->end_date > Date('Y-m-d')  ){ ?> style="background-color: #00acac ; color: white;" <?php }else { ?> style="background-color: #ff5b57 ;color: white;" <?php } ?> ><a  style="color: white" href="<?php echo URL . "projects/show/" . $proj->id ?>"><?php echo $proj->title ?></a >
-                            &nbsp; <?php    echo $proj->start_date ?> &nbsp; <?php echo $proj->end_date ?></li>
+                      <a href="<?php echo URL . "projects/show/" . $proj->id ?>">
+                                <span <?php if ($proj->end_date > Date('Y-m-d')) { ?> style=" color: #00acac ; font-size: 18px " <?php } else { ?> style="  color: #ff5b57 ; font-size: 18px  " <?php } ?>
+                                        class="fa  fa-square p-10"></span>
+                                <?php echo $proj->title ?>
+                            </a>
+                            &nbsp; <?php echo $proj->start_date ?> &nbsp; <?php echo $proj->end_date ?></li>
 
                     <?php } ?>
 
@@ -64,10 +70,14 @@
                 </a>
                 <ul class="sub-menu p-0">
                     <?php foreach ($uncompletedProjectsAdminOf as $proj) { ?>
-                        <li class="p-l-30 p-5" <?php if( $proj->actual_end =="" && $proj->end_date > Date('Y-m-d')  ){ ?> style="background-color: #00acac ; color: white;" <?php }else { ?> style="background-color: #ff5b57 ;color: white;" <?php } ?> ><a  style="color: white" href="<?php echo URL . "projects/show/" . $proj->id ?>"><?php echo $proj->title ?></a >
-                            &nbsp; <?php    echo $proj->start_date ?> &nbsp; <?php echo $proj->end_date ?></li>
+                        <li class="p-l-30 p-5">
+                            <a href="<?php echo URL . "projects/show/" . $proj->id ?>">
+                                <span <?php if ($proj->end_date > Date('Y-m-d')) { ?> style=" color: #00acac ; font-size: 18px " <?php } else { ?> style="  color: #ff5b57 ; font-size: 18px  " <?php } ?>
+                                        class="fa  fa-square p-10"></span>
+                                <?php echo $proj->title ?>
+                            </a>
+                            &nbsp; <?php echo $proj->start_date ?> &nbsp; <?php echo $proj->end_date ?></li>
                     <?php } ?>
-
                 </ul>
             </li>
             <li class="nav-header">COMPLETED PROJECTS</li>
@@ -78,10 +88,16 @@
                     <span class="badge pull-right"><?php echo count($completedProjectsMemberOf); ?></span>
                     <span>Member of</span>
                 </a>
-                <ul class="sub-menu">
+                <ul class="sub-menu  p-0">
                     <?php foreach ($completedProjectsMemberOf as $proj) { ?>
-                        <li><a href="<?php echo URL . "projects/show/" . $proj->id ?>"><?php echo $proj->title ?></a>
-                            &nbsp; <?php echo $proj->start_date ?> &nbsp; <?php echo $proj->end_date ?></li>
+                        <li class="p-l-30 p-5">
+                            <a href="<?php echo URL . "projects/show/" . $proj->id ?>">
+                                <span <?php if ($proj->actual_end <= $proj->end_date) { ?> style=" color: #00acac ; font-size: 18px " <?php } else { ?> style="  color: #ff5b57 ; font-size: 18px  " <?php } ?> class="fa  fa-square p-10">
+                                </span>
+                                <?php echo $proj->title ?>
+                            </a>
+                            &nbsp; <?php echo $proj->start_date ?> &nbsp; <?php echo $proj->end_date ?>
+                        </li>
                     <?php } ?>
 
                 </ul>
@@ -91,10 +107,16 @@
                     <span class="badge pull-right"><?php echo count($completedProjectsAdminOf); ?></span>
                     <span>Admin of</span>
                 </a>
-                <ul class="sub-menu">
+                <ul class="sub-menu  p-0">
                     <?php foreach ($completedProjectsAdminOf as $proj) { ?>
-                        <li><a href="<?php echo URL . "projects/show/" . $proj->id ?>"><?php echo $proj->title ?></a>
-                            &nbsp; <?php echo $proj->start_date ?> &nbsp; <?php echo $proj->end_date ?></li>
+                        <li class="p-l-30 p-5">
+                            <a href="<?php echo URL . "projects/show/" . $proj->id ?>">
+                                <span <?php if ($proj->actual_end <= $proj->end_date) { ?> style=" color: #00acac ; font-size: 18px " <?php } else { ?> style="  color: #ff5b57 ; font-size: 18px  " <?php } ?> class="fa  fa-square p-10">
+                                </span>
+                                <?php echo $proj->title ?>
+                            </a>
+                            &nbsp; <?php echo $proj->start_date ?> &nbsp; <?php echo $proj->end_date ?>
+                        </li>
                     <?php } ?>
 
                 </ul>
@@ -114,7 +136,7 @@
                         <div class="notification p-10">
                             <p style="color: white">
                                 You are invited by
-                                <STRONG><?php echo $this->model['User']->getUser($this->model['Project']->getProject($invitation->project_id)->admin_id)->first_name . '  ' .$this->model['User']->getUser($this->model['Project']->getProject($invitation->project_id)->admin_id)->    last_name; ?>
+                                <STRONG><?php echo $this->model['User']->getUser($this->model['Project']->getProject($invitation->project_id)->admin_id)->first_name . '  ' . $this->model['User']->getUser($this->model['Project']->getProject($invitation->project_id)->admin_id)->last_name; ?>
                                     <br/></STRONG> to the team
                                 <STRONG><?php echo $this->model['Project']->getProject($invitation->project_id)->title; ?></STRONG><br/><br/>
                                 PROJECT DESCRIPTION :<br/>
@@ -141,7 +163,6 @@
 
                 </ul>
             </li>
-
 
 
         </ul>

@@ -9,7 +9,6 @@ class Home extends Controller
         $user = new  User();
 
         include APP . 'core/auth/validations/auth_validation.php';
-
         require APP . 'view/includes/head.php';
         require APP . 'view/includes/header.php';
         require APP . 'view/includes/sidebar.php';

@@ -11,7 +11,6 @@ namespace ptejada\uFlex;
  */
 
 
-
 class User extends UserBase
 {
     /**
@@ -128,9 +127,6 @@ class User extends UserBase
                 if (preg_match($this->_validations->Email->regEx, $identifier)) {
                     //Login using email
                     $getBy = 'Email';
-                } else {
-                    //Login using Username
-                    $getBy = 'Username';
                 }
 
                 $this->log->report('Credentials received');
@@ -389,12 +385,6 @@ class User extends UserBase
             }
         }
 
-        //Check for Username in database
-        if ($info->Username) {
-            if ($this->table->isUnique('Username', $info->Username, 17)) {
-                return false;
-            }
-        }
 
         //Check for errors
         if ($this->log->hasError()) {
@@ -491,7 +481,7 @@ class User extends UserBase
         if ($updates->Password) {
             $updates->Password = $this->hash->generateUserPassword($this, $updates->Password);
         }
-
+        print_r($updates);
         //Check for Email in database
         if ($updates->Email) {
             if ($updates->Email != $this->Email) {
@@ -579,7 +569,6 @@ class User extends UserBase
             return new Collection(
                 array(
                     'Email' => $email,
-                    'Username' => $user->Username,
                     'ID' => $user->ID,
                     'Confirmation' => $data['Confirmation']
                 )

@@ -71,4 +71,15 @@ class User
         $query->execute($parameters);
     }
 
+    /**
+     * @param $user_id
+     */
+    public function deleteUser($user_id)
+    {
+        $sql = "DELETE FROM users WHERE id = :user_id";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':user_id' => $user_id);
+        $query->execute($parameters);
+    }
+
 }

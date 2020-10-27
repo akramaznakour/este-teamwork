@@ -157,7 +157,7 @@ class Project
     public
     function getAllUncompletedProjectsMemberOf($user_id)
     {
-        $sql = "SELECT * FROM projects where id in (select project_id from project_users where user_id = " . $user_id . ") and     ( not progress = 100 or  end_date < actual_end  ) and admin_id not like " . $user_id . " order by start_date desc ";
+        $sql = "SELECT * FROM projects where id in (select project_id from project_users where user_id = " . $user_id . ") and   not progress = 100  and admin_id not like " . $user_id . " order by start_date desc ";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -170,7 +170,7 @@ class Project
     public
     function getAllUncompletedProjectsAdminOf($user_id)
     {
-        $sql = "SELECT * FROM projects where admin_id = " . $user_id . " and ( not progress = 100 or  end_date < actual_end  ) order by start_date desc ";
+        $sql = "SELECT * FROM projects where admin_id = " . $user_id . " and not progress = 100    order by start_date desc ";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -184,7 +184,7 @@ class Project
     public
     function getAllCompletedProjectsMemberOf($user_id)
     {
-        $sql = "SELECT * FROM projects where id in (select project_id from project_users where user_id = " . $user_id . ") and end_date < actual_end and progress = 100 and admin_id not like " . $user_id . " order by start_date desc ";
+        $sql = "SELECT * FROM projects where id in (select project_id from project_users where user_id = " . $user_id . ") and   progress = 100 and admin_id not like " . $user_id . " order by start_date desc ";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -197,7 +197,7 @@ class Project
     public
     function getAllCompletedProjectsAdminOf($user_id)
     {
-        $sql = "SELECT * FROM projects where admin_id = " . $user_id . " and end_date > actual_end  and   progress = 100  order by start_date desc ";
+        $sql = "SELECT * FROM projects where admin_id = " . $user_id . "   and   progress = 100  order by start_date desc ";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -252,5 +252,15 @@ class Project
         foreach ($query->fetchAll() as $row)
             $project_id = $row->id;
         return $project_id;
+    }
+
+    function getAllRemarks($project_id)
+    {
+
+        $sql = "SELECT * from remarks where task_id in (SELECT  id FROM tasks WHERE project_id = :project_id)";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':project_id' => $project_id);
+        $query->execute($parameters);
+        return $query->fetchAll();
     }
 }

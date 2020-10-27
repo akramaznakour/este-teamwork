@@ -52,10 +52,12 @@ class Controller
         require APP . 'model/Task.php';
         require APP . 'model/Message.php';
         require APP . 'model/Membership.php';
+        require APP . 'model/Notification.php';
         $this->model['User'] = new User($this->db);
         $this->model['Project'] = new Project($this->db);
         $this->model['Task'] = new Task($this->db);
         $this->model['Message'] = new Message($this->db);
         $this->model['Membership'] = new Membership($this->db);
+        $this->model['Notification'] = new Notification($this->db);
     }
 }

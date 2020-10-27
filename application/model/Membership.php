@@ -29,7 +29,6 @@ class Membership
         $query = $this->db->prepare($sql);
         $query->execute();
 
-
         return $query->fetchAll();
     }
 
@@ -139,9 +138,15 @@ class Membership
 
         $query->execute($parameters);
 
-        $sql = "UPDATE tasks SET responsable_id = 0 WHERE project_id = :project_id AND responsable_id = :member_id";
+        $sql = "DELETE FROM responsables  WHERE task_id in (SELECT id from tasks where project_id = :project_id) AND responsable_id = :member_id";
         $query = $this->db->prepare($sql);
         $parameters = array(':project_id' => $project_id, ':member_id' => $member_id);
+
+        $query->execute($parameters);
+
+        $sql = "DELETE FROM invitations  WHERE  user_invited_id = :member_id";
+        $query = $this->db->prepare($sql);
+        $parameters = array( ':member_id' => $member_id);
 
         $query->execute($parameters);
     }

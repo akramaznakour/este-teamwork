@@ -15,9 +15,9 @@
                             <div class="col-md-12">
                                 <label class="form-control-label p-b-5 p-t-5">Task
                                     name</label>
-                                <input name="name" class="form-control"
-                                       value="<?php echo $task->name ?>"
-                                       type="text"></div>
+                                <input name="name" class="form-control" value="<?php echo $task->name ?>" type="text">
+                            </div>
+
                             <div class="col-md-12 hidden">
 
                                 <input name="style" class="form-control"
@@ -25,46 +25,78 @@
                                        type="text"></div>
                             <div class="col-md-12 hidden">
 
-                                <input name="isGroup" class="form-control"
-                                       value="<?php echo $task->isGroup ?>"
+                                <input name="isGroup" class="form-control" value="<?php echo $task->isGroup ?>"
                                        type="text"></div>
+
                             <div class="col-md-6 ">
+
                                 <label class="form-control-label p-b-5 p-t-5">Start date</label>
                                 <input name="start_date" value="<?php echo $task->start_date ?>"
                                        max="<?php echo $project->end_date ?>" min="<?php echo $project->start_date ?>"
                                        class="form-control" type="date"></div>
+
                             <div class="col-md-6">
+
                                 <label class="form-control-label p-b-5 p-t-5"> End date </label>
-                                <input name="end_date"
-                                       value="<?php echo $task->end_date ?>"
+                                <input name="end_date" value="<?php echo $task->end_date ?>"
                                        max="<?php echo $project->end_date ?>" min="<?php echo $project->start_date ?>"
-                                       class="form-control"
-                                       type="date">
+                                       class="form-control" type="date">
+
                             </div>
                             <div class="col-md-12">
 
                                 <label class="form-control-label p-b-5 p-t-5">Description </label>
                                 <textarea name="note" class=" form-control"
                                           required><?php echo $task->note ?></textarea>
+
                             </div>
 
 
-                            <div class="col-md-12">
 
-                                <label class="form-control-label p-b-5 p-t-5">lead manager </label>
-                                <select name="responsable_id" class="form-control">
-                                    <?php foreach ($members as $member) { ?>
-                                        <option value="<?php echo $member->ID; ?>" <?php if ($member->ID == $task->responsable_id) { ?> selected="selected" <?php } ?> ><?php echo $member->First_name . ' ' . $member->Last_name ?></option>
+
+                            <div class="col-md-12 p-0 p-b-20 p-t-20">
+
+                                <div id="resources_tab">
+
+                                    <?php foreach ($this->model['Task']->getTaskResponsables($task->id) as $responsable) { ?>
+                                        <div class="col-md-4">
+                                            <div class=" p-0">
+                                                <label> Responsable </label>
+
+                                                <select name="responsables_ids[]" class="form-control"
+                                                        style="display: inline-block;width: 80%">
+
+                                                    <?php foreach ($members as $member) { ?>
+                                                        <option value="<?php echo $member->ID; ?>" <?php if ($member->ID == $responsable->responsable_id)echo 'selected' ;?>><?php echo $member->First_name . ' ' . $member->Last_name ?></option>
+                                                    <?php } ?>
+
+                                                </select>
+
+                                                <span class=" p-0 btn delete-btn"><i class="fa fa-window-close p-0 "></i></span>
+
+                                            </div>
+                                        </div>
+
                                     <?php } ?>
-                                </select>
-                            </div>
-                            <div class="col-md-12 p-0 p-b-10">
 
-                                <div id="resources_tab   ">
+                                </div>
+
+                            </div>
+                            <div class="col-md-12">
+                                <button type="button"
+                                        class="btn btn-primary btn-sm add_responsable_edit"><span
+                                            class="fa fa-plus">&nbsp;Add</span>
+                                </button>
+
+                            </div>
+
+                            <div class="col-md-12 p-0 p-b-20 p-t-20">
+
+                                <div id="resources_tab">
 
                                     <?php foreach ($this->model['Task']->getTaskResources($task->id) as $resource) { ?>
                                         <div class="col-md-3">
-                                            <div class="   p-0">
+                                            <div class=" p-0">
                                                 <label class="form-control-label"
                                                 >resource</label>
                                                 <input class="form-control "
@@ -72,7 +104,7 @@
                                                        name="resources[]"
                                                        value="<?php echo $resource->name ?>"
                                                        type="text">
-                                                <i class=" btn resource_delete p-0" style="padding: 0"><span
+                                                <i class=" btn delete-btn p-0" style="padding: 0"><span
                                                             class="fa fa-window-close"></span>
                                                 </i>
                                             </div>
@@ -86,7 +118,7 @@
                             <div class="col-md-12">
                                 <button type="button"
                                         class="btn btn-primary btn-sm add_resource_edit"><span
-                                            class="fa fa-plus-circle pull-right">&nbsp;Add resources</span>
+                                            class="fa fa-plus">&nbsp;Add</span>
                                 </button>
 
                             </div>
